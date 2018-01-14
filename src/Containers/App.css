@@ -1,0 +1,11 @@
+.App {
+  text-align: center;
+}
+
+.App-good-guess {
+  color: #00ff00;
+}
+
+.App-bad-guess {
+  color: #ff0000;
+}
