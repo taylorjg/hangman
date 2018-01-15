@@ -5,6 +5,7 @@ import Letters from '../Components/Letters';
 import Drawing from '../Components/Drawing';
 import ControlPanel from '../Components/ControlPanel';
 import * as C from '../constants';
+import chooseWord from '../wordList';
 
 class App extends Component {
   constructor(props) {
@@ -12,9 +13,9 @@ class App extends Component {
     this.state = {
       gameState: C.GAME_STATE_IN_PROGRESS,
       outcome: C.OUTCOME_NONE,
-      word: "REACT",
-      goodGuesses: "RE",
-      badGuesses: "DUX"
+      word: chooseWord(),
+      goodGuesses: "",
+      badGuesses: ""
     };
     this.onLetterChosen = this.onLetterChosen.bind(this);
     this.onNewGame = this.onNewGame.bind(this);
@@ -48,7 +49,7 @@ class App extends Component {
     this.setState({
       gameState: C.GAME_STATE_IN_PROGRESS,
       outcome: C.OUTCOME_NONE,
-      word: "ANGULAR",
+      word: chooseWord(),
       goodGuesses: "",
       badGuesses: ""
     });

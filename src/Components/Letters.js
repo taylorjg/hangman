@@ -5,7 +5,7 @@ import './Letters.css';
 
 const LETTERS = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
-const Letters = (props) => {
+const Letters = props => {
     return (
         <div>
             <p>

@@ -27,9 +27,8 @@ const ControlPanel = props => {
 };
 
 ControlPanel.propTypes = {
-    word: PropTypes.string.isRequired,
-    goodGuesses: PropTypes.string.isRequired,
-    badGuesses: PropTypes.string.isRequired,
+    gameState: PropTypes.number.isRequired,
+    outcome: PropTypes.number.isRequired,
     onNewGame: PropTypes.func.isRequired
 };
 
