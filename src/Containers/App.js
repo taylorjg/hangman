@@ -3,31 +3,55 @@ import './App.css';
 import Word from '../Components/Word';
 import Letters from '../Components/Letters';
 import Drawing from '../Components/Drawing';
+import ControlPanel from '../Components/ControlPanel';
+import * as C from '../constants';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      gameState: C.GAME_STATE_IN_PROGRESS,
+      outcome: C.OUTCOME_NONE,
       word: "REACT",
       goodGuesses: "RE",
       badGuesses: "DUX"
     };
     this.onLetterChosen = this.onLetterChosen.bind(this);
+    this.onNewGame = this.onNewGame.bind(this);
   }
 
   onLetterChosen(ch) {
-    if (Array.from(this.state.word).includes(ch)) {
+    if (this.state.gameState === C.GAME_STATE_GAME_OVER) {
+      return;
+    }
+    if (this.state.word.includes(ch)) {
+      const newGoodGuesses = this.state.goodGuesses + ch;
+      const gameOver = newGoodGuesses.length === new Set(this.state.word).size;
       this.setState({
-        goodGuesses: this.state.goodGuesses + ch
+        goodGuesses: newGoodGuesses,
+        gameState: gameOver ? C.GAME_STATE_GAME_OVER : this.state.gameState,
+        outcome: gameOver ? C.OUTCOME_WON : this.state.outcome
       });
     }
     else {
+      const newBadGuesses = this.state.badGuesses + ch;
+      const gameOver = newBadGuesses.length === C.MAX_GUESSES;
       this.setState({
-        badGuesses: this.state.badGuesses + ch
+        badGuesses: newBadGuesses,
+        gameState: gameOver ? C.GAME_STATE_GAME_OVER : this.state.gameState,
+        outcome: gameOver ? C.OUTCOME_LOST : this.state.outcome
       });
     }
-    // if goodGuesses.length === word.length => GAME_OVER | WON
-    // if badGuesses.length === MAX_GUESSES => GAME_OVER | LOST 
+  }
+
+  onNewGame() {
+    this.setState({
+      gameState: C.GAME_STATE_IN_PROGRESS,
+      outcome: C.OUTCOME_NONE,
+      word: "ANGULAR",
+      goodGuesses: "",
+      badGuesses: ""
+    });
   }
 
   render() {
@@ -36,6 +60,7 @@ class App extends Component {
         <Word {...this.state} />
         <Drawing {...this.state} />
         <Letters {...this.state} onLetterChosen={this.onLetterChosen} />
+        <ControlPanel {...this.state} onNewGame={this.onNewGame} />
       </div>
     );
   }

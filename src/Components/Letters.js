@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LetterButton from './LetterButton';
+import './Letters.css';
 
 const LETTERS = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
@@ -11,10 +12,10 @@ const Letters = (props) => {
                 {
                     LETTERS.map(ch => {
                         if (Array.from(props.goodGuesses).includes(ch)) {
-                            return <span key={ch} className="App-good-guess">{ch}</span>
+                            return <span key={ch} className="Letters-good-guess">{ch}</span>
                         } else {
                             if (Array.from(props.badGuesses).includes(ch)) {
-                                return <span key={ch} className="App-bad-guess">{ch}</span>
+                                return <span key={ch} className="Letters-bad-guess">{ch}</span>
                             }
                             else {
                                 return <LetterButton
