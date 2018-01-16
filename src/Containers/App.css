@@ -1,3 +1,8 @@
 .App {
   text-align: center;
 }
+
+.App-version {
+  font-size: small;
+  font-style: italic; 
+}

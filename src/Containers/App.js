@@ -6,6 +6,7 @@ import Drawing from '../Components/Drawing';
 import ControlPanel from '../Components/ControlPanel';
 import * as C from '../constants';
 import chooseWord from '../wordList';
+import { version } from '../../package.json';
 
 class App extends Component {
   constructor(props) {
@@ -58,6 +59,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="App-version">version: {version}</div>
         <Word {...this.state} />
         <Drawing {...this.state} />
         <Letters {...this.state} onLetterChosen={this.onLetterChosen} />
