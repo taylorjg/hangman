@@ -5,7 +5,7 @@ Just practising my React skills by implementing [Hangman](https://en.wikipedia.o
 # Planned Development Steps
 
 * ~~Basic game functionality (no Redux, no SVG)~~
-* Circle CI 2, deployment to Heroku, display version
+* ~~Circle CI 2, deployment to Heroku, display version~~
 * Add web api to choose a word
 * Improvement the UI (Bootstrap etc), favicon ?
 * Add tests
