@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/taylorjg/hangman.svg?style=svg)](https://circleci.com/gh/taylorjg/hangman)
+[![CircleCI](https://circleci.com/gh/taylorjg/hangman/tree/master.svg?style=svg)](https://circleci.com/gh/taylorjg/hangman/tree/master)
 
 # Description
 
