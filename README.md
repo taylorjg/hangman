@@ -6,6 +6,7 @@ Just practising my React skills by implementing [Hangman](https://en.wikipedia.o
 
 # Planned Development Steps
 
+* ~~Use [create-react-app](https://github.com/facebookincubator/create-react-app) to create the initial project~~
 * ~~Basic game functionality (no Redux, no SVG)~~
 * ~~Circle CI 2, deployment to Heroku, display version~~
 * Add web api to choose a word
