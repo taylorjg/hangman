@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/taylorjg/hangman.svg?style=svg)](https://circleci.com/gh/taylorjg/hangman)
+
 # Description
 
 Just practising my React skills by implementing [Hangman](https://en.wikipedia.org/wiki/Hangman_(game)).
