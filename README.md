@@ -14,7 +14,8 @@ Just practising my React skills by implementing [Hangman](https://en.wikipedia.o
 * ~~Use [create-react-app](https://github.com/facebookincubator/create-react-app) to create the initial project structure~~
 * ~~Basic game functionality (no Redux, no SVG)~~
 * ~~Circle CI 2, deployment to Heroku, display version~~
-* ~~Add web api to choose a word~~
+* ~~Add a basic web api method to choose a word~~
+* Enhance the web api method to use an online dictionary or similar
 * Improve the UI (Bootstrap etc), favicon ?
 * Add tests
 * Provide facility to guess a letter via the keyboard
@@ -29,3 +30,9 @@ Just practising my React skills by implementing [Hangman](https://en.wikipedia.o
 * Responsive UI
 * Sound effects
 * Provide facility to enter a guess at the full word
+
+# Workflow
+
+* Do work on a separate feature branch
+* PRs should target the develop branch
+* To release, merge into the master branch which will deploy to Heroku on successful build/test
