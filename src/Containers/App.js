@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
 import Word from '../Components/Word';
 import Letters from '../Components/Letters';
 import Drawing from '../Components/Drawing';
 import ControlPanel from '../Components/ControlPanel';
 import * as C from '../constants';
-import chooseWord from '../wordList';
 import { version } from '../../package.json';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gameState: C.GAME_STATE_IN_PROGRESS,
+      gameState: C.GAME_STATE_CHOOSING_WORD,
       outcome: C.OUTCOME_NONE,
-      word: chooseWord(),
+      word: "",
       goodGuesses: "",
       badGuesses: ""
     };
     this.onLetterChosen = this.onLetterChosen.bind(this);
     this.onNewGame = this.onNewGame.bind(this);
+  }
+
+  componentDidMount() {
+    this.chooseWord();
   }
 
   onLetterChosen(ch) {
@@ -37,7 +41,7 @@ class App extends Component {
     }
     else {
       const newBadGuesses = this.state.badGuesses + ch;
-      const gameOver = newBadGuesses.length === C.MAX_GUESSES;
+      const gameOver = newBadGuesses.length === C.MAX_BAD_GUESSES;
       this.setState({
         badGuesses: newBadGuesses,
         gameState: gameOver ? C.GAME_STATE_GAME_OVER : this.state.gameState,
@@ -48,12 +52,23 @@ class App extends Component {
 
   onNewGame() {
     this.setState({
-      gameState: C.GAME_STATE_IN_PROGRESS,
+      gameState: C.GAME_STATE_CHOOSING_WORD,
       outcome: C.OUTCOME_NONE,
-      word: chooseWord(),
+      word: "",
       goodGuesses: "",
       badGuesses: ""
     });
+    this.chooseWord();
+  }
+
+  chooseWord() {
+    this.props.api.chooseWord()
+      .then(({ word }) => {
+        this.setState({
+          gameState: C.GAME_STATE_IN_PROGRESS,
+          word
+        });
+      });
   }
 
   render() {
@@ -68,5 +83,9 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  api: PropTypes.object.isRequired
+};
 
 export default App;
