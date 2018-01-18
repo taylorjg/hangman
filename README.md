@@ -15,7 +15,7 @@ Just practising my React skills by implementing [Hangman](https://en.wikipedia.o
 * ~~Basic game functionality (no Redux, no SVG)~~
 * ~~Circle CI 2, deployment to Heroku, display version~~
 * ~~Add a basic web api method to choose a word~~
-* Enhance the web api method to use an online dictionary or similar
+* ~~Enhance the web api method to use an online dictionary or similar~~
 * Improve the UI (Bootstrap etc), favicon ?
 * Add tests
 * Provide facility to guess a letter via the keyboard
