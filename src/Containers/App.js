@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
 import Word from '../Components/Word';
 import Letters from '../Components/Letters';
@@ -40,7 +41,7 @@ class App extends Component {
     }
     else {
       const newBadGuesses = this.state.badGuesses + ch;
-      const gameOver = newBadGuesses.length === C.MAX_GUESSES;
+      const gameOver = newBadGuesses.length === C.MAX_BAD_GUESSES;
       this.setState({
         badGuesses: newBadGuesses,
         gameState: gameOver ? C.GAME_STATE_GAME_OVER : this.state.gameState,
@@ -61,8 +62,7 @@ class App extends Component {
   }
 
   chooseWord() {
-    fetch("/api/chooseWord", { method: "POST" })
-      .then(res => res.json())
+    this.props.api.chooseWord()
       .then(({ word }) => {
         this.setState({
           gameState: C.GAME_STATE_IN_PROGRESS,
@@ -83,5 +83,9 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  api: PropTypes.object.isRequired
+};
 
 export default App;
