@@ -24,7 +24,7 @@ Just practising my React skills by implementing [Hangman](https://en.wikipedia.o
 * Add rendering of the gallows etc using SVG
 * Enhance the rendering by adding animation
 
-## Optional Extras
+## Further Ideas
 
 * Chalk-like look
 * Responsive UI

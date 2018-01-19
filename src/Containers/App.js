@@ -26,12 +26,12 @@ class App extends Component {
     this.chooseWord();
   }
 
-  onLetterChosen(ch) {
-    if (this.state.gameState === C.GAME_STATE_GAME_OVER) {
+  onLetterChosen(letter) {
+    if (this.state.gameState !== C.GAME_STATE_IN_PROGRESS) {
       return;
     }
-    if (this.state.word.includes(ch)) {
-      const newGoodGuesses = this.state.goodGuesses + ch;
+    if (this.state.word.includes(letter)) {
+      const newGoodGuesses = this.state.goodGuesses + letter;
       const gameOver = newGoodGuesses.length === new Set(this.state.word).size;
       this.setState({
         goodGuesses: newGoodGuesses,
@@ -40,7 +40,7 @@ class App extends Component {
       });
     }
     else {
-      const newBadGuesses = this.state.badGuesses + ch;
+      const newBadGuesses = this.state.badGuesses + letter;
       const gameOver = newBadGuesses.length === C.MAX_BAD_GUESSES;
       this.setState({
         badGuesses: newBadGuesses,

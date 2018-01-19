@@ -45,6 +45,6 @@ const chooseWord = (req, res) => {
 };
 
 const router = express.Router();
-router.post('/chooseWord', chooseWord);
+router.get('/chooseWord', chooseWord);
 
 module.exports = router;
