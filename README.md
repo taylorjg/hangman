@@ -17,19 +17,21 @@ Just practising my React skills by implementing [Hangman](https://en.wikipedia.o
 * ~~Add a basic web api method to choose a word~~
 * ~~Enhance the web api method to use an online dictionary or similar~~
 * Improve the UI (Bootstrap etc), favicon ?
-* Add tests
-* Provide facility to guess a letter via the keyboard
+* Add keyboard support
 * Add web api error handling / local fallback
-* Convert to Redux
 * Add rendering of the gallows etc using SVG
-* Enhance the rendering by adding animation
+* Add tests
+* Convert to Redux
 
 ## Further Ideas
 
+* Animate the rendering
 * Chalk-like look
 * Responsive UI
 * Sound effects
 * Provide facility to enter a guess at the full word
+* Support different difficulty levels
+* Support different categories of words
 
 # Workflow
 

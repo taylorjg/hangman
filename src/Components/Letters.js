@@ -3,24 +3,25 @@ import PropTypes from 'prop-types';
 import LetterButton from './LetterButton';
 import './Letters.css';
 
-const LETTERS = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-
 const Letters = props => {
+
+    const LETTERS = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    
     return (
         <div>
             <p>
                 {
-                    LETTERS.map(ch => {
-                        if (Array.from(props.goodGuesses).includes(ch)) {
-                            return <span key={ch} className="Letters-good-guess">{ch}</span>
+                    LETTERS.map(letter => {
+                        if (props.goodGuesses.includes(letter)) {
+                            return <span key={letter} className="Letters-good-guess">{letter}</span>
                         } else {
-                            if (Array.from(props.badGuesses).includes(ch)) {
-                                return <span key={ch} className="Letters-bad-guess">{ch}</span>
+                            if (props.badGuesses.includes(letter)) {
+                                return <span key={letter} className="Letters-bad-guess">{letter}</span>
                             }
                             else {
                                 return <LetterButton
-                                    key={ch}
-                                    letter={ch}
+                                    key={letter}
+                                    letter={letter}
                                     onLetterChosen={props.onLetterChosen}></LetterButton>
                             }
                         }

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Drawing = (props) => {
+const Drawing = props => {
     return (
         <div>
-            <p>TODO: Drawing (length: {props.badGuesses.length})</p>
+            <p>TODO: Drawing (bad guesses: {props.badGuesses.length})</p>
         </div>
     );
 };

@@ -5,23 +5,24 @@ import * as C from '../constants';
 const WON_MESSAGE = "You won!";
 const LOST_MESSAGE = "You lost!";
 
-const renderMessage = props =>
-    props.gameState === C.GAME_STATE_GAME_OVER
-        ? props.outcome === C.OUTCOME_WON
-            ? <p>{WON_MESSAGE}</p>
-            : <p>{LOST_MESSAGE}</p>
-        : "";
-
-const renderButton = props =>
-    props.gameState === C.GAME_STATE_GAME_OVER
-        ? <button onClick={props.onNewGame}>New Game</button>
-        : "";
-
 const ControlPanel = props => {
+
+    const renderMessage = () =>
+        props.gameState === C.GAME_STATE_GAME_OVER
+            ? props.outcome === C.OUTCOME_WON
+                ? <p>{WON_MESSAGE}</p>
+                : <p>{LOST_MESSAGE}</p>
+            : "";
+
+    const renderButton = () =>
+        props.gameState === C.GAME_STATE_GAME_OVER
+            ? <button onClick={props.onNewGame}>New Game</button>
+            : "";
+
     return (
         <div>
-            {renderMessage(props)}
-            {renderButton(props)}
+            {renderMessage()}
+            {renderButton()}
         </div>
     );
 };
