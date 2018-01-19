@@ -29,9 +29,10 @@ jobs:
           fingerprints:
             - "87:da:92:b5:bf:18:cd:06:58:25:64:de:2b:cf:93:b3"
       - run:
-          name: Deploy Master to Heroku
+          name: Deploy master to Heroku
           command: |
             git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
+            heroku restart -a $HEROKU_APP_NAME
                
 workflows:
   version: 2
