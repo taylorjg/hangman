@@ -8,7 +8,8 @@ const Word = props => {
             <p>
                 {
                     props.gameState === C.GAME_STATE_IN_PROGRESS
-                        ? Array.from(props.word).map(ch => props.goodGuesses.includes(ch) ? ch : "_")
+                        ? Array.from(props.word).map(letter =>
+                            props.goodGuesses.includes(letter) ? letter : "_")
                         : <span>{props.word || "?????"}</span>
                 }
             </p>

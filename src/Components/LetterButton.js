@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LetterButton = (props) => {
+const LetterButton = props => {
     return (
         <button onClick={() => props.onLetterChosen(props.letter)}>{props.letter}</button>
     );
