@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
+import Gallows from '../Components/Gallows';
 import Word from '../Components/Word';
 import Letters from '../Components/Letters';
-import Drawing from '../Components/Drawing';
 import ControlPanel from '../Components/ControlPanel';
 import * as C from '../constants';
 import { version } from '../../package.json';
@@ -75,8 +75,8 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-version">version: {version}</div>
+        <Gallows {...this.state} />
         <Word {...this.state} />
-        <Drawing {...this.state} />
         <Letters {...this.state} onLetterChosen={this.onLetterChosen} />
         <ControlPanel {...this.state} onNewGame={this.onNewGame} />
       </div>

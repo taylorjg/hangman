@@ -12,26 +12,28 @@ Just practising my React skills by implementing [Hangman](https://en.wikipedia.o
 # Planned Development Steps
 
 * ~~Use [create-react-app](https://github.com/facebookincubator/create-react-app) to create the initial project structure~~
-* ~~Basic game functionality (no Redux, no SVG)~~
-* ~~Circle CI 2, deployment to Heroku, display version~~
+* ~~Basic game functionality (no Redux, no gallows)~~
+* ~~Circle CI 2, deployment to Heroku, display app version~~
 * ~~Add a basic web api method to choose a word~~
 * ~~Enhance the web api method to use an online dictionary or similar~~
-* Improve the UI (Bootstrap etc), favicon ?
-* Add keyboard support
+* ~~Render the gallows using SVG~~
 * Add web api error handling / local fallback
-* Add rendering of the gallows etc using SVG
+* Improve the UI (Bootstrap etc)
+* Add keyboard support
 * Add tests
 * Convert to Redux
 
 ## Further Ideas
 
-* Animate the rendering
+* Add a favicon
+* Animate the SVG gallows rendering
 * Chalk-like look
 * Responsive UI
 * Sound effects
 * Provide facility to enter a guess at the full word
 * Support different difficulty levels
 * Support different categories of words
+* Support phrases
 
 # Workflow
 

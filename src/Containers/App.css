@@ -3,6 +3,7 @@
 }
 
 .App-version {
+  margin: 10px;
   font-size: small;
   font-style: italic; 
 }
