@@ -1,31 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LetterButton from './LetterButton';
-import './Letters.css';
+import Letter, * as L from './Letter';
 
 const Letters = props => {
 
     const LETTERS = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-    
+
+    const getLetterMode = letter => {
+        if (props.goodGuesses.includes(letter)) {
+            return L.LETTER_MODE_CORRECT;
+        }
+        if (props.badGuesses.includes(letter)) {
+            return L.LETTER_MODE_INCORRECT;
+        }
+        return L.LETTER_MODE_AVAILABLE;
+    };
+
     return (
         <div>
             <p>
                 {
-                    LETTERS.map(letter => {
-                        if (props.goodGuesses.includes(letter)) {
-                            return <span key={letter} className="Letters-good-guess">{letter}</span>
-                        } else {
-                            if (props.badGuesses.includes(letter)) {
-                                return <span key={letter} className="Letters-bad-guess">{letter}</span>
-                            }
-                            else {
-                                return <LetterButton
-                                    key={letter}
-                                    letter={letter}
-                                    onLetterChosen={props.onLetterChosen}></LetterButton>
-                            }
-                        }
-                    })
+                    LETTERS.map(letter =>
+                        <Letter
+                            key={letter}
+                            letter={letter}
+                            mode={getLetterMode(letter)}
+                            onLetterChosen={props.onLetterChosen}>
+                        </Letter>
+                    )
                 }
             </p>
         </div>
