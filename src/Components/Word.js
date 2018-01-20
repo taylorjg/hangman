@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as C from '../constants';
+import './Word.css';
 
 const Word = props => {
     return (
         <div>
             <p>
-                {
-                    props.gameState === C.GAME_STATE_IN_PROGRESS
-                        ? Array.from(props.word).map(letter =>
-                            props.goodGuesses.includes(letter) ? letter : "_")
-                        : <span>{props.word || "?????"}</span>
-                }
+                <span className="Word">
+                    {
+                        props.gameState === C.GAME_STATE_IN_PROGRESS
+                            ? Array.from(props.word).map(letter =>
+                                props.goodGuesses.includes(letter) ? letter : "-")
+                            : props.word || "?????"
+                    }
+                </span>
             </p>
         </div>
     );
