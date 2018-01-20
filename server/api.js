@@ -1,5 +1,5 @@
-const express = require('express');
-const fetch = require('node-fetch');
+const express = require("express");
+const axios = require("axios");
 
 const FALLBACK_WORD_LIST = [
     "react",
@@ -23,28 +23,26 @@ const chooseWord = (req, res) => {
 
     const isSuitable = line =>
         line.length >= 5 &&
-        line.replace(/[a-zA-Z]/g, '').length === 0;
+        line.replace(/[a-zA-Z]/g, "").length === 0;
 
-    fetch('https://raw.githubusercontent.com/csurfer/gitlang/master/languages.txt')
-        .then(fetchResponse => fetchResponse.text())
-        .then(text => {
-            const lines = text.split('\n').map(line => line.trim());
+    axios.get("https://raw.githubusercontent.com/csurfer/gitlang/master/languages.txt-crap")
+        .then(response => {
+            const lines = response.data.split("\n").map(line => line.trim());
             const words = lines.filter(isSuitable);
-            const word = pickWordAtRandom(words);
-            return word;
+            return pickWordAtRandom(words);
         })
-        .catch(() => {
-            const word = pickWordAtRandom(FALLBACK_WORD_LIST);
-            return word;
+        .catch(error => {
+            console.log(`[chooseWord] ${error}`);
+            return pickWordAtRandom(FALLBACK_WORD_LIST);
         })
         .then(word => {
             const result = { word };
-            console.log(`[chooseWord]: returning ${JSON.stringify(result)}`);
+            console.log(`[chooseWord] returning ${JSON.stringify(result)}`);
             res.json(result);
         });
 };
 
 const router = express.Router();
-router.get('/chooseWord', chooseWord);
+router.get("/chooseWord", chooseWord);
 
 module.exports = router;
