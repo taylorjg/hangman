@@ -1,12 +1,13 @@
+import axios from 'axios';
+
 export const api = {
   chooseWord: () =>
-    fetch(
+    axios.get(
       "/api/chooseWord",
       {
-        method: "GET",
-        headers: new Headers({
+        headers: {
           "accept": "application/json"
-        })
+        }
       })
-      .then(res => res.json())
+      .then(response => response.data)
 };
