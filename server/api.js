@@ -25,7 +25,7 @@ const chooseWord = (req, res) => {
         line.length >= 5 &&
         line.replace(/[a-zA-Z]/g, "").length === 0;
 
-    axios.get("https://raw.githubusercontent.com/csurfer/gitlang/master/languages.txt-crap")
+    axios.get("https://raw.githubusercontent.com/csurfer/gitlang/master/languages.txt")
         .then(response => {
             const lines = response.data.split("\n").map(line => line.trim());
             const words = lines.filter(isSuitable);
