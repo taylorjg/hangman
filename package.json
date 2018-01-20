@@ -1,6 +1,6 @@
 {
   "name": "hangman",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
@@ -12,12 +12,13 @@
     "react-scripts": "1.0.17"
   },
   "scripts": {
-    "start-dev": "react-scripts start",
-    "start": "node server",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build && mv build server/public"
   },
-  "devDependencies": {}
+  "engines": {
+    "node": "8.4.0"
+  }
 }
