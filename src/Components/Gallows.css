@@ -1,0 +1,12 @@
+#gallows {
+    background-color: aliceblue;
+    margin: 20px;
+    width: 300px;
+    height: 300px;
+}
+
+path {
+    stroke: black;
+    stroke-width: 2;
+    fill-opacity: 0;
+}
