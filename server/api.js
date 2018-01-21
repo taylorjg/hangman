@@ -22,8 +22,7 @@ const pickWordAtRandom = words => {
 const chooseWord = (req, res) => {
 
     const isSuitable = line =>
-        line.length >= 5 &&
-        line.replace(/[a-zA-Z]/g, "").length === 0;
+        /^[A-Z]{3,}$/i.test(line);
 
     axios.get("https://raw.githubusercontent.com/csurfer/gitlang/master/languages.txt")
         .then(response => {
