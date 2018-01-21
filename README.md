@@ -9,6 +9,8 @@ develop | [![CircleCI](https://circleci.com/gh/taylorjg/hangman/tree/develop.svg
 
 Just practising my React skills by implementing [Hangman](https://en.wikipedia.org/wiki/Hangman_(game)).
 
+Words are chosen from the list of programming languages [here](https://raw.githubusercontent.com/csurfer/gitlang/master/languages.txt). I haven't heard of most of them! I filter the list for entries that consist of only alphabetic characters and are at least 5 characters long.
+
 # Planned Development Steps
 
 * ~~Use [create-react-app](https://github.com/facebookincubator/create-react-app) to create the initial project structure~~
@@ -81,3 +83,5 @@ to specify the command that will launch our Express web server:
 ```
 web: node server
 ```
+
+The Express web server serves static content from `./server/public` and also serves our web api method i.e. `GET` requests to `/api/chooseWord`.
