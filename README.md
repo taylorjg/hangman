@@ -40,3 +40,44 @@ Just practising my React skills by implementing [Hangman](https://en.wikipedia.o
 * Do work on a separate feature branch
 * PRs should target the develop branch
 * To release, merge into the master branch which will deploy to Heroku on successful build/test
+
+# Running in development mode
+
+To run in development mode, we need to run two web servers.
+The first is the main development server on port 3000 that is a standard part of `create-react-app`.
+This is started via `npm start`.
+The second is the Express web server on port 3001 to serve web api requests.
+This is started via `node server`.
+You then point a web browser to `http://localhost:3000`.
+The following line in `package.json` enables proxying of web api requests to the Express web server:
+
+```
+  "proxy": "http://localhost:3001/",
+```
+
+It does this automatically as described
+[here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#proxying-api-requests-in-development):
+
+> Any unrecognized request without a text/html accept header will be redirected to the specified proxy
+
+# Running in production
+
+The app runs in production on [Heroku](https://www.heroku.com/). It is automatically deployed there by [Circle CI](https://circleci.com/) whenever the `master` branch is checked in and the build succeeds.
+Deployment is achieved by pushing the entire repo to Heroku. Once this has been done, Heroku checks
+the `package.json` for a `heroku-postbuild` script. If it finds one, it is executed. We use the
+following script:
+
+```
+    "heroku-postbuild": "npm run build && mv build server/public"
+```
+
+We build the production version of the app using the standard `create-react-app`
+mechanism (`npm run build`).
+The resulting artifact is available in `./build`.
+We then move this directory to `./server/public` to be served by our Express web server.
+Finally, we use a [`Procfile`](https://devcenter.heroku.com/articles/procfile)
+to specify the command that will launch our Express web server:
+
+```
+web: node server
+```
