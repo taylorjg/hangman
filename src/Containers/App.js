@@ -14,9 +14,9 @@ class App extends Component {
     this.state = {
       gameState: C.GAME_STATE_CHOOSING_WORD,
       outcome: C.OUTCOME_NONE,
-      word: "",
-      goodGuesses: "",
-      badGuesses: ""
+      word: '',
+      goodGuesses: '',
+      badGuesses: ''
     };
     this.onLetterChosen = this.onLetterChosen.bind(this);
     this.onNewGame = this.onNewGame.bind(this);
@@ -27,36 +27,38 @@ class App extends Component {
   }
 
   onLetterChosen(letter) {
-    if (this.state.gameState !== C.GAME_STATE_IN_PROGRESS) {
-      return;
-    }
-    if (this.state.word.includes(letter)) {
-      const newGoodGuesses = this.state.goodGuesses + letter;
-      const gameOver = newGoodGuesses.length === new Set(this.state.word).size;
-      this.setState({
-        goodGuesses: newGoodGuesses,
-        gameState: gameOver ? C.GAME_STATE_GAME_OVER : this.state.gameState,
-        outcome: gameOver ? C.OUTCOME_WON : this.state.outcome
-      });
-    }
-    else {
-      const newBadGuesses = this.state.badGuesses + letter;
-      const gameOver = newBadGuesses.length === C.MAX_BAD_GUESSES;
-      this.setState({
-        badGuesses: newBadGuesses,
-        gameState: gameOver ? C.GAME_STATE_GAME_OVER : this.state.gameState,
-        outcome: gameOver ? C.OUTCOME_LOST : this.state.outcome
-      });
-    }
+    this.setState(state => {
+      if (state.gameState !== C.GAME_STATE_IN_PROGRESS) {
+        return null;
+      }
+      if (state.word.includes(letter)) {
+        const newGoodGuesses = state.goodGuesses + letter;
+        const gameOver = newGoodGuesses.length === new Set(state.word).size;
+        return {
+          goodGuesses: newGoodGuesses,
+          gameState: gameOver ? C.GAME_STATE_GAME_OVER : state.gameState,
+          outcome: gameOver ? C.OUTCOME_WON : state.outcome
+        };
+      }
+      else {
+        const newBadGuesses = state.badGuesses + letter;
+        const gameOver = newBadGuesses.length === C.MAX_BAD_GUESSES;
+        return {
+          badGuesses: newBadGuesses,
+          gameState: gameOver ? C.GAME_STATE_GAME_OVER : state.gameState,
+          outcome: gameOver ? C.OUTCOME_LOST : state.outcome
+        };
+      }
+    });
   }
 
   onNewGame() {
     this.setState({
       gameState: C.GAME_STATE_CHOOSING_WORD,
       outcome: C.OUTCOME_NONE,
-      word: "",
-      goodGuesses: "",
-      badGuesses: ""
+      word: '',
+      goodGuesses: '',
+      badGuesses: ''
     });
     this.chooseWord();
   }
@@ -73,8 +75,8 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="App-version">version: {version}</div>
+      <div className='App'>
+        <div className='App-version'>version: {version}</div>
         <Gallows {...this.state} />
         <Word {...this.state} />
         <Letters {...this.state} onLetterChosen={this.onLetterChosen} />

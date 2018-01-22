@@ -1,9 +1,9 @@
 const WORD_LIST = [
-    "react",
-    "redux",
-    "angular",
-    "javascript",
-    "ecmascript"
+    'react',
+    'redux',
+    'angular',
+    'javascript',
+    'ecmascript'
 ];
 
 const NUM_WORDS = WORD_LIST.length;

@@ -3,20 +3,18 @@ import PropTypes from 'prop-types';
 import * as C from '../constants';
 import './Word.css';
 
-const Word = props => {
+const Word = ({ gameState, word, goodGuesses }) => {
     return (
-        <div>
-            <p>
-                <span className="Word">
-                    {
-                        props.gameState === C.GAME_STATE_IN_PROGRESS
-                            ? Array.from(props.word).map(letter =>
-                                props.goodGuesses.includes(letter) ? letter : "-")
-                            : props.word || "?????"
-                    }
-                </span>
-            </p>
-        </div>
+        <p>
+            <span className='Word'>
+                {
+                    gameState === C.GAME_STATE_IN_PROGRESS
+                        ? Array.from(word).map(letter =>
+                            goodGuesses.includes(letter) ? letter : '-')
+                        : word || '?????'
+                }
+            </span>
+        </p>
     );
 };
 
