@@ -3,10 +3,10 @@ import axios from 'axios';
 export const api = {
   chooseWord: () =>
     axios.get(
-      "/api/chooseWord",
+      '/api/chooseWord',
       {
         headers: {
-          "accept": "application/json"
+          'accept': 'application/json'
         }
       })
       .then(response => response.data)

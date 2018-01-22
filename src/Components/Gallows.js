@@ -3,14 +3,8 @@ import PropTypes from 'prop-types';
 import { drawGallows } from './gallowsSvg';
 import './Gallows.css';
 
-const Gallows = props => {
-    const numBadGuesses = props.badGuesses.length;
-    return (
-        <div>
-            <svg id="gallows" ref={drawGallows(numBadGuesses)}></svg>
-        </div>
-    );
-};
+const Gallows = ({ badGuesses }) =>
+    <svg id='gallows' ref={drawGallows(badGuesses.length)}></svg>
 
 Gallows.propTypes = {
     badGuesses: PropTypes.string.isRequired

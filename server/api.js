@@ -1,16 +1,16 @@
-const express = require("express");
-const axios = require("axios");
+const express = require('express');
+const axios = require('axios');
 
 const FALLBACK_WORD_LIST = [
-    "react",
-    "redux",
-    "angular",
-    "javascript",
-    "ecmascript",
-    "haskell",
-    "pascal",
-    "scala",
-    "clojure"
+    'react',
+    'redux',
+    'angular',
+    'javascript',
+    'ecmascript',
+    'haskell',
+    'pascal',
+    'scala',
+    'clojure'
 ];
 
 const pickWordAtRandom = words => {
@@ -22,11 +22,11 @@ const pickWordAtRandom = words => {
 const chooseWord = (req, res) => {
 
     const isSuitable = line =>
-        /^[A-Z]{3,}$/i.test(line);
+        /^[A-Z]{5,}$/i.test(line);
 
-    axios.get("https://raw.githubusercontent.com/csurfer/gitlang/master/languages.txt")
+    axios.get('https://raw.githubusercontent.com/csurfer/gitlang/master/languages.txt')
         .then(response => {
-            const lines = response.data.split("\n").map(line => line.trim());
+            const lines = response.data.split('\n').map(line => line.trim());
             const words = lines.filter(isSuitable);
             return pickWordAtRandom(words);
         })
@@ -42,6 +42,6 @@ const chooseWord = (req, res) => {
 };
 
 const router = express.Router();
-router.get("/chooseWord", chooseWord);
+router.get('/chooseWord', chooseWord);
 
 module.exports = router;
