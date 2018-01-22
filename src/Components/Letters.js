@@ -4,38 +4,38 @@ import Letter, * as L from './Letter';
 
 const Letters = ({ goodGuesses, badGuesses, onLetterChosen }) => {
 
-    const LETTERS = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+  const LETTERS = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
-    const getLetterMode = letter => {
-        if (goodGuesses.includes(letter)) {
-            return L.LETTER_MODE_CORRECT;
-        }
-        if (badGuesses.includes(letter)) {
-            return L.LETTER_MODE_INCORRECT;
-        }
-        return L.LETTER_MODE_AVAILABLE;
-    };
+  const getLetterMode = letter => {
+    if (goodGuesses.includes(letter)) {
+      return L.LETTER_MODE_CORRECT;
+    }
+    if (badGuesses.includes(letter)) {
+      return L.LETTER_MODE_INCORRECT;
+    }
+    return L.LETTER_MODE_AVAILABLE;
+  };
 
-    return (
-        <p>
-            {
-                LETTERS.map(letter =>
-                    <Letter
-                        key={letter}
-                        letter={letter}
-                        mode={getLetterMode(letter)}
-                        onLetterChosen={onLetterChosen}>
-                    </Letter>
-                )
-            }
-        </p>
-    );
+  return (
+    <p>
+      {
+        LETTERS.map(letter =>
+          <Letter
+            key={letter}
+            letter={letter}
+            mode={getLetterMode(letter)}
+            onLetterChosen={onLetterChosen}>
+          </Letter>
+        )
+      }
+    </p>
+  );
 };
 
 Letters.propTypes = {
-    goodGuesses: PropTypes.string.isRequired,
-    badGuesses: PropTypes.string.isRequired,
-    onLetterChosen: PropTypes.func.isRequired
+  goodGuesses: PropTypes.string.isRequired,
+  badGuesses: PropTypes.string.isRequired,
+  onLetterChosen: PropTypes.func.isRequired
 };
 
 export default Letters;

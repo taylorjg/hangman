@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 
 const apiMock = {
-  chooseWord: () => new Promise((/* resolve, reject */) => {})
+  chooseWord: () => new Promise((/* resolve, reject */) => { })
 };
 
 it('renders without crashing', () => {

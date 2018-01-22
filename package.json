@@ -1,6 +1,6 @@
 {
   "name": "hangman",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
