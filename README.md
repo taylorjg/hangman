@@ -19,9 +19,9 @@ Words are chosen from the list of programming languages [here](https://raw.githu
 * ~~Add a basic web api method to choose a word~~
 * ~~Enhance the web api method to use an online dictionary or similar~~
 * ~~Render the gallows using SVG~~
+* ~~Add keyboard support~~
 * Add web api error handling / local fallback
 * Improve the UI (Bootstrap etc)
-* Add keyboard support
 * Add tests
 * Convert to Redux
 
