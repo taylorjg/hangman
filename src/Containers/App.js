@@ -20,6 +20,8 @@ class App extends Component {
     };
     this.onLetterChosen = this.onLetterChosen.bind(this);
     this.onNewGame = this.onNewGame.bind(this);
+    this.onKeyPress = this.onKeyPress.bind(this);
+    this.establishKeyPressHandler = this.establishKeyPressHandler.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +31,9 @@ class App extends Component {
   onLetterChosen(letter) {
     this.setState(state => {
       if (state.gameState !== C.GAME_STATE_IN_PROGRESS) {
+        return null;
+      }
+      if (state.goodGuesses.includes(letter)) {
         return null;
       }
       if (state.word.includes(letter)) {
@@ -63,6 +68,21 @@ class App extends Component {
     this.chooseWord();
   }
 
+  onKeyPress(ev) {
+    this.onLetterChosen(ev.key.toUpperCase());
+  }
+
+  establishKeyPressHandler(element) {
+    this.ownerDocument = element.ownerDocument;
+    this.ownerDocument.addEventListener('keypress', this.onKeyPress);
+  }
+
+  componentWillUnmount() {
+    if (this.ownerDocument) {
+      this.ownerDocument.removeEventListener('keypress', this.onKeyPress);
+    }
+  }
+
   chooseWord() {
     this.props.api.chooseWord()
       .then(({ word }) => {
@@ -75,7 +95,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className='App'>
+      <div className='App' ref={this.establishKeyPressHandler}>
         <div className='App-version'>version: {version}</div>
         <Gallows {...this.state} />
         <Word {...this.state} />
