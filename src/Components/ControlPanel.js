@@ -15,7 +15,9 @@ const ControlPanel = ({ gameState, outcome, onNewGame }) => {
 
   const renderButton = () =>
     gameState === C.GAME_STATE_GAME_OVER &&
-    <button onClick={onNewGame}>New Game</button>
+    <button onClick={onNewGame} ref={button => button && button.focus()}>
+      New Game
+    </button>
 
   return (
     <div>
