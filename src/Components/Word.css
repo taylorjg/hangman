@@ -1,3 +1,8 @@
 .Word {
   font-family: Courier New, Courier, monospace;
 }
+
+.Word-loading {
+	font-size: small;
+	font-style: italic;
+}
