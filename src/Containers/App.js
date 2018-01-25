@@ -5,6 +5,7 @@ import Gallows from '../Components/Gallows';
 import Word from '../Components/Word';
 import Letters from '../Components/Letters';
 import ControlPanel from '../Components/ControlPanel';
+import ErrorPanel from '../Components/ErrorPanel';
 import * as C from '../constants';
 import { version } from '../../package.json';
 
@@ -16,7 +17,8 @@ class App extends Component {
       outcome: C.OUTCOME_NONE,
       word: '',
       goodGuesses: '',
-      badGuesses: ''
+      badGuesses: '',
+      errorMessage: ''
     };
     this.onLetterChosen = this.onLetterChosen.bind(this);
     this.onNewGame = this.onNewGame.bind(this);
@@ -63,7 +65,8 @@ class App extends Component {
       outcome: C.OUTCOME_NONE,
       word: '',
       goodGuesses: '',
-      badGuesses: ''
+      badGuesses: '',
+      errorMessage: ''
     });
     this.chooseWord();
   }
@@ -85,10 +88,12 @@ class App extends Component {
 
   chooseWord() {
     this.props.api.chooseWord()
-      .then(({ word }) => {
+      .then(data => {
+        console.log(`[chooseWord#then] data: ${JSON.stringify(data)}`);
         this.setState({
           gameState: C.GAME_STATE_IN_PROGRESS,
-          word
+          word: data.word,
+          errorMessage: data.errorMessage || ''
         });
       });
   }
@@ -101,6 +106,7 @@ class App extends Component {
         <Word {...this.state} />
         <Letters {...this.state} onLetterChosen={this.onLetterChosen} />
         <ControlPanel {...this.state} onNewGame={this.onNewGame} />
+        <ErrorPanel {...this.state} />
       </div>
     );
   }

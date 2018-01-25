@@ -1,0 +1,13 @@
+.ErrorPanel {
+	font-size: small;
+	font-style: italic;
+	line-height: 30px;
+}
+
+.ErrorPanel img {
+	vertical-align: middle;
+}
+
+.ErrorPanel span {
+	vertical-align: middle;
+}
