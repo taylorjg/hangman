@@ -9,15 +9,14 @@ const ErrorPanel = ({ errorMessage }) => {
 
   const renderError = () => {
     return (
-      <div className="ErrorPanel">
+      <span className="ErrorPanel">
         <img
           src="WarningTriangle-16x16.png"
           alt="Warning triangle"
           title={errorMessage}
         />
-        {' '}
-        <span>{FRIENDLY_MESSAGE}</span>
-      </div>
+        {FRIENDLY_MESSAGE}
+      </span>
     )
   };
 

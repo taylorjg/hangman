@@ -24,11 +24,11 @@ const Word = ({ gameState, word, goodGuesses }) => {
       case C.GAME_STATE_CHOOSING_WORD:
       default:
         return (
-          <div className="Word-loading">
+          <span className="Word-loading">
             <img src="spinner.gif" alt="Spinner" />
-            {' '}
-            <span>(choosing a word...)</span>
-          </div>)
+            (choosing a word...)
+          </span>
+        )
     }
   };
 

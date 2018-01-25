@@ -10,10 +10,6 @@
 }
 
 .Word-loading img {
-	vertical-align: middle;
-
-}
-
-.Word-loading span {
+	margin-right: 5px;
 	vertical-align: middle;
 }

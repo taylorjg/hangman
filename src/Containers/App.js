@@ -35,7 +35,7 @@ class App extends Component {
       if (state.gameState !== C.GAME_STATE_IN_PROGRESS) {
         return null;
       }
-      if (state.goodGuesses.includes(letter)) {
+      if (state.goodGuesses.includes(letter) || state.badGuesses.includes(letter)) {
         return null;
       }
       if (state.word.includes(letter)) {
@@ -86,16 +86,13 @@ class App extends Component {
     }
   }
 
-  chooseWord() {
-    this.props.api.chooseWord()
-      .then(data => {
-        console.log(`[chooseWord#then] data: ${JSON.stringify(data)}`);
-        this.setState({
-          gameState: C.GAME_STATE_IN_PROGRESS,
-          word: data.word,
-          errorMessage: data.errorMessage || ''
-        });
-      });
+  async chooseWord() {
+    const data = await this.props.api.chooseWord();
+    this.setState({
+      gameState: C.GAME_STATE_IN_PROGRESS,
+      word: data.word,
+      errorMessage: data.errorMessage || ''
+    });
   }
 
   render() {
