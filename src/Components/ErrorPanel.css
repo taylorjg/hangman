@@ -5,9 +5,6 @@
 }
 
 .ErrorPanel img {
-	vertical-align: middle;
-}
-
-.ErrorPanel span {
+	margin-right: 5px;
 	vertical-align: middle;
 }
