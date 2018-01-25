@@ -97,8 +97,8 @@ class App extends Component {
 
   render() {
     return (
-      <div className='App' ref={this.establishKeyPressHandler}>
-        <div className='App-version'>version: {version}</div>
+      <div className="App" ref={this.establishKeyPressHandler}>
+        <div className="App-version">version: {version}</div>
         <Gallows {...this.state} />
         <Word {...this.state} />
         <Letters {...this.state} onLetterChosen={this.onLetterChosen} />
