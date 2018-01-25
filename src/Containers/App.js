@@ -86,16 +86,13 @@ class App extends Component {
     }
   }
 
-  chooseWord() {
-    this.props.api.chooseWord()
-      .then(data => {
-        console.log(`[chooseWord#then] data: ${JSON.stringify(data)}`);
-        this.setState({
-          gameState: C.GAME_STATE_IN_PROGRESS,
-          word: data.word,
-          errorMessage: data.errorMessage || ''
-        });
-      });
+  async chooseWord() {
+    const data = await this.props.api.chooseWord();
+    this.setState({
+      gameState: C.GAME_STATE_IN_PROGRESS,
+      word: data.word,
+      errorMessage: data.errorMessage || ''
+    });
   }
 
   render() {
