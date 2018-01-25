@@ -1,8 +1,19 @@
 .Word {
   font-family: Courier New, Courier, monospace;
+	line-height: 30px;
 }
 
 .Word-loading {
 	font-size: small;
 	font-style: italic;
+	line-height: 30px;
+}
+
+.Word-loading img {
+	vertical-align: middle;
+
+}
+
+.Word-loading span {
+	vertical-align: middle;
 }
