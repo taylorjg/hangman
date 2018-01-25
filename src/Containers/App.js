@@ -35,7 +35,7 @@ class App extends Component {
       if (state.gameState !== C.GAME_STATE_IN_PROGRESS) {
         return null;
       }
-      if (state.goodGuesses.includes(letter)) {
+      if (state.goodGuesses.includes(letter) || state.badGuesses.includes(letter)) {
         return null;
       }
       if (state.word.includes(letter)) {
