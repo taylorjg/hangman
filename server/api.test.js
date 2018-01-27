@@ -20,14 +20,14 @@ describe('server-side web api', () => {
     expect(word.toUpperCase()).to.equal(word);
   };
 
-  describe('integration tests', () => {
+  describe('using real remote calls', () => {
 
     it('succeeds', async () => {
       const response = await request(app).get(CHOOSE_WORD_PATH);
       checkResponse(response);
     });
 
-    it('returns a different word each time', async () => {
+    it('returns a random word', async () => {
       const NUM_WORDS = 5;
       const range = Array.from(Array(NUM_WORDS).keys());
       const requests = range.map(() => request(app).get(CHOOSE_WORD_PATH));
@@ -60,7 +60,17 @@ describe('server-side web api', () => {
       checkResponse(response);
     });
 
-    it('returns a different word each time', async () => {
+    it('succeeds when remote call fails', async () => {
+
+      moxios.stubRequest(REMOTE_CALL_PATH, {
+        status: 503
+      });
+
+      const response = await request(app).get(CHOOSE_WORD_PATH);
+      checkResponse(response);
+    });
+
+    it('returns a random word when remote call fails', async () => {
 
       moxios.stubRequest(REMOTE_CALL_PATH, {
         status: 503
@@ -74,16 +84,6 @@ describe('server-side web api', () => {
       const words = responses.map(response => response.body.word);
       const set = new Set(words);
       expect(set.size).to.equal(NUM_WORDS);
-    });
-
-    it('succeeds when remote call fails', async () => {
-
-      moxios.stubRequest(REMOTE_CALL_PATH, {
-        status: 503
-      });
-
-      const response = await request(app).get(CHOOSE_WORD_PATH);
-      checkResponse(response);
     });
   });
 });
