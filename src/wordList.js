@@ -2,12 +2,19 @@ const FALLBACK_WORD_LIST = [
   'react',
   'redux',
   'angular',
+  'ember',
+  'jasmine',
+  'mocha',
+  'enzyme',
   'javascript',
   'ecmascript',
   'haskell',
   'pascal',
   'scala',
-  'clojure'
+  'clojure',
+  'scheme',
+  'typescript',
+  'fortran'
 ];
 
 const pickWordAtRandom = words => {
