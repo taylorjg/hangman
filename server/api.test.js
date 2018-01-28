@@ -20,6 +20,16 @@ describe('server-side web api', () => {
     expect(word.toUpperCase()).to.equal(word);
   };
 
+  const getWords = async numWords => {
+    const range = Array.from(Array(numWords).keys());
+    const requests = range.map(() => request(app).get(CHOOSE_WORD_PATH));
+    const responses = await axios.all(requests);
+    responses.forEach(checkResponse);
+    const words = responses.map(response => response.body.word);
+    const set = new Set(words);
+    expect(set.size).to.equal(numWords);
+  };
+
   describe('using real remote calls', () => {
 
     it('succeeds', async () => {
@@ -27,15 +37,9 @@ describe('server-side web api', () => {
       checkResponse(response);
     });
 
-    it('returns a random word', async () => {
-      const NUM_WORDS = 5;
-      const range = Array.from(Array(NUM_WORDS).keys());
-      const requests = range.map(() => request(app).get(CHOOSE_WORD_PATH));
-      const responses = await axios.all(requests);
-      responses.forEach(checkResponse);
-      const words = responses.map(response => response.body.word);
-      const set = new Set(words);
-      expect(set.size).to.equal(NUM_WORDS);
+    it('returns a random word', async function () {
+      this.retries(5);
+      await getWords(5);
     });
   });
 
@@ -70,20 +74,14 @@ describe('server-side web api', () => {
       checkResponse(response);
     });
 
-    it('returns a random word when remote call fails', async () => {
+    it('returns a random word when remote call fails', async function () {
 
       moxios.stubRequest(REMOTE_CALL_PATH, {
         status: 503
       });
 
-      const NUM_WORDS = 3;
-      const range = Array.from(Array(NUM_WORDS).keys());
-      const requests = range.map(() => request(app).get(CHOOSE_WORD_PATH));
-      const responses = await axios.all(requests);
-      responses.forEach(checkResponse);
-      const words = responses.map(response => response.body.word);
-      const set = new Set(words);
-      expect(set.size).to.equal(NUM_WORDS);
+      this.retries(5);
+      await getWords(5);
     });
   });
 });
