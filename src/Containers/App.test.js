@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactTestUtils from 'react-dom/test-utils';
 import { shallow, mount } from 'enzyme';
 import App from './App';
 import Gallows from '../Components/Gallows';
@@ -9,14 +8,15 @@ import ControlPanel from '../Components/ControlPanel';
 import ErrorPanel from '../Components/ErrorPanel';
 import * as C from '../constants';
 
-// TODO: use Jest mocking instead of props.api
-const apiMock = {
-  chooseWord: () => Promise.resolve({ word: 'REACT' })
-};
+jest.mock('../api', () => ({
+  api: {
+    chooseWord: () => Promise.resolve({ word: 'REACT' })
+  }
+}));
 
-it('renders without crashing', () => {
+it('renders child components', () => {
 
-  const wrapper = shallow(<App api={apiMock} />);
+  const wrapper = shallow(<App />);
 
   expect(wrapper.find(Gallows).length).toEqual(1);
   expect(wrapper.find(Word).length).toEqual(1);
@@ -27,13 +27,13 @@ it('renders without crashing', () => {
 
 it('handles good and bad guesses correctly', async () => {
 
-  const wrapper = shallow(<App api={apiMock} />);
+  const wrapper = shallow(<App />);
+  const instance = wrapper.instance();
 
   expect(wrapper.state('word')).toEqual('');
   expect(wrapper.state('goodGuesses')).toEqual('');
   expect(wrapper.state('badGuesses')).toEqual('');
 
-  const instance = wrapper.instance();
   await instance.componentDidMount();
   expect(wrapper.state('word')).toEqual('REACT');
   expect(wrapper.state('goodGuesses')).toEqual('');
@@ -62,7 +62,7 @@ it('handles good and bad guesses correctly', async () => {
 
 it('handles game over / won correctly', async () => {
 
-  const wrapper = shallow(<App api={apiMock} />);
+  const wrapper = shallow(<App />);
 
   const instance = wrapper.instance();
   await instance.componentDidMount();
@@ -82,7 +82,7 @@ it('handles game over / won correctly', async () => {
 
 it('handles game over / lost correctly', async () => {
 
-  const wrapper = shallow(<App api={apiMock} />);
+  const wrapper = shallow(<App />);
 
   const instance = wrapper.instance();
   await instance.componentDidMount();
@@ -108,7 +108,7 @@ it('handles game over / lost correctly', async () => {
 
 it('handles letter button clicks correctly', async () => {
 
-  const wrapper = mount(<App api={apiMock} />);
+  const wrapper = mount(<App />);
 
   const instance = wrapper.instance();
   await instance.componentDidMount();
@@ -132,7 +132,7 @@ it('handles keypresses correctly', async () => {
     document.dispatchEvent(event);
   };
 
-  const wrapper = mount(<App api={apiMock} />);
+  const wrapper = mount(<App />);
 
   const instance = wrapper.instance();
   await instance.componentDidMount();
