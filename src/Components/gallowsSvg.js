@@ -1,8 +1,8 @@
-const createSVGElement = elementName =>
+const createSVGElement = (document, elementName) =>
   document.createElementNS('http://www.w3.org/2000/svg', elementName);
 
-const createPath = data => {
-  const path = createSVGElement('path');
+const createPath = (document, data) => {
+  const path = createSVGElement(document, 'path');
   path.setAttribute('d', data);
   return path;
 };
@@ -35,7 +35,7 @@ export const drawGallows = numBadGuesses => svg => {
     removeChidren(svg);
     DRAWING_DATA.forEach((data, index) => {
       if (index < numBadGuesses) {
-        const path = createPath(data);
+        const path = createPath(svg.ownerDocument, data);
         svg.appendChild(path);
       }
     });

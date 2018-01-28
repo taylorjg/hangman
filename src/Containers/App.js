@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import './App.css';
+import { api } from '../api';
 import Gallows from '../Components/Gallows';
 import Word from '../Components/Word';
 import Letters from '../Components/Letters';
@@ -8,6 +7,7 @@ import ControlPanel from '../Components/ControlPanel';
 import ErrorPanel from '../Components/ErrorPanel';
 import * as C from '../constants';
 import { version } from '../../package.json';
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -76,8 +76,10 @@ class App extends Component {
   }
 
   establishKeyPressHandler(element) {
-    this.ownerDocument = element.ownerDocument;
-    this.ownerDocument.addEventListener('keypress', this.onKeyPress);
+    if (element) {
+      this.ownerDocument = element.ownerDocument;
+      this.ownerDocument.addEventListener('keypress', this.onKeyPress);
+      }
   }
 
   componentWillUnmount() {
@@ -87,7 +89,7 @@ class App extends Component {
   }
 
   async chooseWord() {
-    const data = await this.props.api.chooseWord();
+    const data = await api.chooseWord();
     this.setState({
       gameState: C.GAME_STATE_IN_PROGRESS,
       word: data.word,
@@ -108,9 +110,5 @@ class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  api: PropTypes.object.isRequired
-};
 
 export default App;
