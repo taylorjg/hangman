@@ -76,8 +76,10 @@ class App extends Component {
   }
 
   establishKeyPressHandler(element) {
-    this.ownerDocument = element.ownerDocument;
-    this.ownerDocument.addEventListener('keypress', this.onKeyPress);
+    if (element) {
+      this.ownerDocument = element.ownerDocument;
+      this.ownerDocument.addEventListener('keypress', this.onKeyPress);
+      }
   }
 
   componentWillUnmount() {
