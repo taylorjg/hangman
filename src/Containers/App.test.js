@@ -1,22 +1,23 @@
 import React from 'react';
+import ReactTestUtils from 'react-dom/test-utils';
 import { shallow, mount } from 'enzyme';
-import ReactDOM from 'react-dom';
 import App from './App';
 import Gallows from '../Components/Gallows';
 import Word from '../Components/Word';
-import Letter from '../Components/Letter';
 import Letters from '../Components/Letters';
 import ControlPanel from '../Components/ControlPanel';
 import ErrorPanel from '../Components/ErrorPanel';
 import * as C from '../constants';
 
 // TODO: use Jest mocking instead of props.api
+const apiMock = {
+  chooseWord: () => Promise.resolve({ word: 'REACT' })
+};
 
 it('renders without crashing', () => {
-  const apiMock = {
-    chooseWord: () => new Promise((/* resolve, reject */) => { })
-  };
+
   const wrapper = shallow(<App api={apiMock} />);
+
   expect(wrapper.find(Gallows).length).toEqual(1);
   expect(wrapper.find(Word).length).toEqual(1);
   expect(wrapper.find(Letters).length).toEqual(1);
@@ -25,9 +26,7 @@ it('renders without crashing', () => {
 });
 
 it('handles good and bad guesses correctly', async () => {
-  const apiMock = {
-    chooseWord: () => Promise.resolve({ word: 'REACT' })
-  };
+
   const wrapper = shallow(<App api={apiMock} />);
 
   expect(wrapper.state('word')).toEqual('');
@@ -36,7 +35,6 @@ it('handles good and bad guesses correctly', async () => {
 
   const instance = wrapper.instance();
   await instance.componentDidMount();
-
   expect(wrapper.state('word')).toEqual('REACT');
   expect(wrapper.state('goodGuesses')).toEqual('');
   expect(wrapper.state('badGuesses')).toEqual('');
@@ -60,14 +58,10 @@ it('handles good and bad guesses correctly', async () => {
   expect(wrapper.state('word')).toEqual('REACT');
   expect(wrapper.state('goodGuesses')).toEqual('A');
   expect(wrapper.state('badGuesses')).toEqual('B');
-
-  wrapper.unmount();
 });
 
 it('handles game over / won correctly', async () => {
-  const apiMock = {
-    chooseWord: () => Promise.resolve({ word: 'REACT' })
-  };
+
   const wrapper = shallow(<App api={apiMock} />);
 
   const instance = wrapper.instance();
@@ -84,14 +78,10 @@ it('handles game over / won correctly', async () => {
   expect(wrapper.state('badGuesses')).toEqual('');
   expect(wrapper.state('gameState')).toEqual(C.GAME_STATE_GAME_OVER);
   expect(wrapper.state('outcome')).toEqual(C.OUTCOME_WON);
-
-  wrapper.unmount();
 });
 
 it('handles game over / lost correctly', async () => {
-  const apiMock = {
-    chooseWord: () => Promise.resolve({ word: 'REACT' })
-  };
+
   const wrapper = shallow(<App api={apiMock} />);
 
   const instance = wrapper.instance();
@@ -114,23 +104,19 @@ it('handles game over / lost correctly', async () => {
   expect(wrapper.state('badGuesses')).toEqual('BDFGHIJKLMN');
   expect(wrapper.state('gameState')).toEqual(C.GAME_STATE_GAME_OVER);
   expect(wrapper.state('outcome')).toEqual(C.OUTCOME_LOST);
-
-  wrapper.unmount();
 });
 
 it('handles letter button clicks correctly', async () => {
-  const apiMock = {
-    chooseWord: () => Promise.resolve({ word: 'REACT' })
-  };
+
   const wrapper = mount(<App api={apiMock} />);
 
   const instance = wrapper.instance();
   await instance.componentDidMount();
 
-  const letterButton = wrapper.findWhere(n => n.exists() && n.prop('letter') === 'A');
+  const letterButton = wrapper.findWhere(n =>
+    n.exists() && n.prop('letter') === 'A');
   letterButton.simulate('click');
 
-  instance.onLetterChosen('A');
   expect(wrapper.state('word')).toEqual('REACT');
   expect(wrapper.state('goodGuesses')).toEqual('A');
   expect(wrapper.state('badGuesses')).toEqual('');
@@ -139,22 +125,27 @@ it('handles letter button clicks correctly', async () => {
 });
 
 it('handles keypresses correctly', async () => {
-  const apiMock = {
-    chooseWord: () => Promise.resolve({ word: 'REACT' })
+
+  const simulateKeypress = letter => {
+    const event = new Event('keypress');
+    event.key = letter;
+    document.dispatchEvent(event);
   };
-  const wrapper = shallow(<App api={apiMock} />);
+
+  const wrapper = mount(<App api={apiMock} />);
 
   const instance = wrapper.instance();
   await instance.componentDidMount();
 
-  const event = new Event('keypress');
-  event.key = 'A';
-  document.dispatchEvent(event);
-
-  instance.onLetterChosen('A');
+  simulateKeypress('A');
   expect(wrapper.state('word')).toEqual('REACT');
   expect(wrapper.state('goodGuesses')).toEqual('A');
   expect(wrapper.state('badGuesses')).toEqual('');
+
+  simulateKeypress('B');
+  expect(wrapper.state('word')).toEqual('REACT');
+  expect(wrapper.state('goodGuesses')).toEqual('A');
+  expect(wrapper.state('badGuesses')).toEqual('B');
 
   wrapper.unmount();
 });
