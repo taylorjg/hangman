@@ -3,7 +3,8 @@ import { shallow } from 'enzyme';
 import Letters from './Letters';
 import Letter, * as L from './Letter';
 
-const LETTERS = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+// QWERTY layout
+const LETTERS = Array.from('QWERTYUIOPASDFGHJKLZXCVBNM');
 
 const letterToMode = letter => {
   switch (letter) {

@@ -1,0 +1,9 @@
+.Letters-row {
+  margin-bottom: 6px;
+}
+
+.Letters-row button {
+  width: 21px;
+  height: 21px;
+  margin-right: 3px;
+}

@@ -1,10 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Letter, * as L from './Letter';
+import './Letters.css';
 
 const Letters = ({ goodGuesses, badGuesses, onLetterChosen }) => {
 
-  const LETTERS = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+  const LETTER_ROWS = [
+    Array.from('QWERTYUIOP'),
+    Array.from('ASDFGHJKL'),
+    Array.from('ZXCVBNM')
+  ];
 
   const getLetterMode = letter => {
     if (goodGuesses.includes(letter)) {
@@ -16,10 +21,10 @@ const Letters = ({ goodGuesses, badGuesses, onLetterChosen }) => {
     return L.LETTER_MODE_AVAILABLE;
   };
 
-  return (
-    <p>
+  const renderRowOfLetters = row =>
+    <div className="Letters-row">
       {
-        LETTERS.map(letter =>
+        LETTER_ROWS[row].map(letter =>
           <Letter
             key={letter}
             letter={letter}
@@ -28,7 +33,14 @@ const Letters = ({ goodGuesses, badGuesses, onLetterChosen }) => {
           </Letter>
         )
       }
-    </p>
+    </div>;
+
+  return (
+    <div>
+      {renderRowOfLetters(0)}
+      {renderRowOfLetters(1)}
+      {renderRowOfLetters(2)}
+    </div>
   );
 };
 
