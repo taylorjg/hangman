@@ -23,18 +23,18 @@ const Letter = ({ letter, mode, onLetterChosen }) => {
       onClick={() => onLetterChosen(letter)}
     >
       {letter}
-    </button>
+    </button>;
 
   const renderSpan = () =>
     <span
       className={getClassName()}
     >
       {letter}
-    </span>
+    </span>;
 
   return mode === LETTER_MODE_AVAILABLE
     ? renderButton()
-    : renderSpan()
+    : renderSpan();
 };
 
 Letter.propTypes = {

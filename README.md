@@ -21,7 +21,7 @@ Words are chosen from the list of programming languages [here](https://raw.githu
 * ~~Render the gallows using SVG~~
 * ~~Add keyboard support~~
 * ~~Add web api error handling / local fallback~~
-* Add tests
+* ~~Add tests~~
 * Improve the UI (Bootstrap etc)
 * Convert to Redux
 

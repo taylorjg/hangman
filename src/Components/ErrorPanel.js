@@ -17,14 +17,14 @@ const ErrorPanel = ({ errorMessage }) => {
         />
         {FRIENDLY_MESSAGE}
       </span>
-    )
+    );
   };
 
   return (
     <div>
       {errorMessage && renderError()}
     </div>
-  )
+  );
 };
 
 ErrorPanel.propTypes = {

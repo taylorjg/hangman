@@ -1,10 +1,9 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './Containers/App';
 import registerServiceWorker from './registerServiceWorker';
-import { api } from './api';
+import App from './Containers/App';
+import './index.css';
 
-ReactDOM.render(<App api={api} />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();

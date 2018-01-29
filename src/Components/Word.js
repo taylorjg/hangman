@@ -16,10 +16,10 @@ const Word = ({ gameState, word, goodGuesses }) => {
                 goodGuesses.includes(letter) ? letter : '-')
             }
           </span>
-        )
+        );
 
       case C.GAME_STATE_GAME_OVER:
-        return <span className="Word">{word}</span>
+        return <span className="Word">{word}</span>;
 
       case C.GAME_STATE_CHOOSING_WORD:
       default:
@@ -28,7 +28,7 @@ const Word = ({ gameState, word, goodGuesses }) => {
             <img src="spinner.gif" alt="Spinner" />
             (choosing a word...)
           </span>
-        )
+        );
     }
   };
 
