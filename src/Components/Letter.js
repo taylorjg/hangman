@@ -19,22 +19,14 @@ const Letter = ({ letter, mode, onLetterChosen }) => {
 
   const renderButton = () =>
     <button
-      className="Letter-available"
+      className={getClassName()}
       onClick={() => onLetterChosen(letter)}
+      disabled={mode !== LETTER_MODE_AVAILABLE}
     >
       {letter}
     </button>;
 
-  const renderSpan = () =>
-    <span
-      className={getClassName()}
-    >
-      {letter}
-    </span>;
-
-  return mode === LETTER_MODE_AVAILABLE
-    ? renderButton()
-    : renderSpan();
+  return renderButton();
 };
 
 Letter.propTypes = {
