@@ -11,20 +11,20 @@ const ControlPanel = ({ gameState, outcome, onNewGame }) => {
     gameState === C.GAME_STATE_GAME_OVER &&
     (outcome === C.OUTCOME_WON
       ? <p>{WON_MESSAGE}</p>
-      : <p>{LOST_MESSAGE}</p>)
+      : <p>{LOST_MESSAGE}</p>);
 
   const renderButton = () =>
     gameState === C.GAME_STATE_GAME_OVER &&
     <button onClick={onNewGame} ref={button => button && button.focus()}>
       New Game
-    </button>
+    </button>;
 
   return (
     <div>
       {renderMessage()}
       {renderButton()}
     </div>
-  )
+  );
 };
 
 ControlPanel.propTypes = {
