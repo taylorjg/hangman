@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import App from './App';
+import RemainingLives from '../Components/RemainingLives';
 import Gallows from '../Components/Gallows';
 import Word from '../Components/Word';
 import Letters from '../Components/Letters';
@@ -15,14 +16,13 @@ jest.mock('../api', () => ({
 }));
 
 it('renders child components', () => {
-
   const wrapper = shallow(<App />);
-
-  expect(wrapper.find(Gallows).length).toEqual(1);
-  expect(wrapper.find(Word).length).toEqual(1);
-  expect(wrapper.find(Letters).length).toEqual(1);
-  expect(wrapper.find(ControlPanel).length).toEqual(1);
-  expect(wrapper.find(ErrorPanel).length).toEqual(1);
+  expect(wrapper.find(RemainingLives)).toHaveLength(1);
+  expect(wrapper.find(Gallows)).toHaveLength(1);
+  expect(wrapper.find(Word)).toHaveLength(1);
+  expect(wrapper.find(Letters)).toHaveLength(1);
+  expect(wrapper.find(ControlPanel)).toHaveLength(1);
+  expect(wrapper.find(ErrorPanel)).toHaveLength(1);
 });
 
 it('handles good and bad guesses correctly', async () => {
@@ -30,34 +30,34 @@ it('handles good and bad guesses correctly', async () => {
   const wrapper = shallow(<App />);
   const instance = wrapper.instance();
 
-  expect(wrapper.state('word')).toEqual('');
-  expect(wrapper.state('goodGuesses')).toEqual('');
-  expect(wrapper.state('badGuesses')).toEqual('');
+  expect(wrapper.state('word')).toBe('');
+  expect(wrapper.state('goodGuesses')).toBe('');
+  expect(wrapper.state('badGuesses')).toBe('');
 
   await instance.componentDidMount();
-  expect(wrapper.state('word')).toEqual('REACT');
-  expect(wrapper.state('goodGuesses')).toEqual('');
-  expect(wrapper.state('badGuesses')).toEqual('');
+  expect(wrapper.state('word')).toBe('REACT');
+  expect(wrapper.state('goodGuesses')).toBe('');
+  expect(wrapper.state('badGuesses')).toBe('');
 
   instance.onLetterChosen('A');
-  expect(wrapper.state('word')).toEqual('REACT');
-  expect(wrapper.state('goodGuesses')).toEqual('A');
-  expect(wrapper.state('badGuesses')).toEqual('');
+  expect(wrapper.state('word')).toBe('REACT');
+  expect(wrapper.state('goodGuesses')).toBe('A');
+  expect(wrapper.state('badGuesses')).toBe('');
 
   instance.onLetterChosen('B');
-  expect(wrapper.state('word')).toEqual('REACT');
-  expect(wrapper.state('goodGuesses')).toEqual('A');
-  expect(wrapper.state('badGuesses')).toEqual('B');
+  expect(wrapper.state('word')).toBe('REACT');
+  expect(wrapper.state('goodGuesses')).toBe('A');
+  expect(wrapper.state('badGuesses')).toBe('B');
 
   instance.onLetterChosen('A');
-  expect(wrapper.state('word')).toEqual('REACT');
-  expect(wrapper.state('goodGuesses')).toEqual('A');
-  expect(wrapper.state('badGuesses')).toEqual('B');
+  expect(wrapper.state('word')).toBe('REACT');
+  expect(wrapper.state('goodGuesses')).toBe('A');
+  expect(wrapper.state('badGuesses')).toBe('B');
 
   instance.onLetterChosen('B');
-  expect(wrapper.state('word')).toEqual('REACT');
-  expect(wrapper.state('goodGuesses')).toEqual('A');
-  expect(wrapper.state('badGuesses')).toEqual('B');
+  expect(wrapper.state('word')).toBe('REACT');
+  expect(wrapper.state('goodGuesses')).toBe('A');
+  expect(wrapper.state('badGuesses')).toBe('B');
 });
 
 it('handles game over / won correctly', async () => {
@@ -73,11 +73,11 @@ it('handles game over / won correctly', async () => {
   instance.onLetterChosen('C');
   instance.onLetterChosen('T');
 
-  expect(wrapper.state('word')).toEqual('REACT');
-  expect(wrapper.state('goodGuesses')).toEqual('REACT');
-  expect(wrapper.state('badGuesses')).toEqual('');
-  expect(wrapper.state('gameState')).toEqual(C.GAME_STATE_GAME_OVER);
-  expect(wrapper.state('outcome')).toEqual(C.OUTCOME_WON);
+  expect(wrapper.state('word')).toBe('REACT');
+  expect(wrapper.state('goodGuesses')).toBe('REACT');
+  expect(wrapper.state('badGuesses')).toBe('');
+  expect(wrapper.state('gameState')).toBe(C.GAME_STATE_GAME_OVER);
+  expect(wrapper.state('outcome')).toBe(C.OUTCOME_WON);
 });
 
 it('handles game over / lost correctly', async () => {
@@ -99,11 +99,11 @@ it('handles game over / lost correctly', async () => {
   instance.onLetterChosen('M');
   instance.onLetterChosen('N');
 
-  expect(wrapper.state('word')).toEqual('REACT');
-  expect(wrapper.state('goodGuesses')).toEqual('');
-  expect(wrapper.state('badGuesses')).toEqual('BDFGHIJKLMN');
-  expect(wrapper.state('gameState')).toEqual(C.GAME_STATE_GAME_OVER);
-  expect(wrapper.state('outcome')).toEqual(C.OUTCOME_LOST);
+  expect(wrapper.state('word')).toBe('REACT');
+  expect(wrapper.state('goodGuesses')).toBe('');
+  expect(wrapper.state('badGuesses')).toBe('BDFGHIJKLMN');
+  expect(wrapper.state('gameState')).toBe(C.GAME_STATE_GAME_OVER);
+  expect(wrapper.state('outcome')).toBe(C.OUTCOME_LOST);
 });
 
 it('non A-Z letter choices are ignored', async () => {
@@ -114,24 +114,24 @@ it('non A-Z letter choices are ignored', async () => {
   await instance.componentDidMount();
 
   instance.onLetterChosen('1');
-  expect(wrapper.state('goodGuesses')).toEqual('');
-  expect(wrapper.state('badGuesses')).toEqual('');
+  expect(wrapper.state('goodGuesses')).toBe('');
+  expect(wrapper.state('badGuesses')).toBe('');
 });
 
 it('handles letter button clicks correctly', async () => {
 
   const wrapper = mount(<App />);
-
   const instance = wrapper.instance();
   await instance.componentDidMount();
+  wrapper.update();
 
   const letterButton = wrapper.findWhere(n =>
     n.exists() && n.prop('letter') === 'A');
   letterButton.simulate('click');
 
-  expect(wrapper.state('word')).toEqual('REACT');
-  expect(wrapper.state('goodGuesses')).toEqual('A');
-  expect(wrapper.state('badGuesses')).toEqual('');
+  expect(wrapper.state('word')).toBe('REACT');
+  expect(wrapper.state('goodGuesses')).toBe('A');
+  expect(wrapper.state('badGuesses')).toBe('');
 
   wrapper.unmount();
 });
@@ -150,14 +150,14 @@ it('handles keypresses correctly', async () => {
   await instance.componentDidMount();
 
   simulateKeypress('A');
-  expect(wrapper.state('word')).toEqual('REACT');
-  expect(wrapper.state('goodGuesses')).toEqual('A');
-  expect(wrapper.state('badGuesses')).toEqual('');
+  expect(wrapper.state('word')).toBe('REACT');
+  expect(wrapper.state('goodGuesses')).toBe('A');
+  expect(wrapper.state('badGuesses')).toBe('');
 
   simulateKeypress('B');
-  expect(wrapper.state('word')).toEqual('REACT');
-  expect(wrapper.state('goodGuesses')).toEqual('A');
-  expect(wrapper.state('badGuesses')).toEqual('B');
+  expect(wrapper.state('word')).toBe('REACT');
+  expect(wrapper.state('goodGuesses')).toBe('A');
+  expect(wrapper.state('badGuesses')).toBe('B');
 
   wrapper.unmount();
 });

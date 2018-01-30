@@ -9,9 +9,9 @@ const helper = (mode, className, callCount) => {
       letter="A"
       mode={mode}
       onLetterChosen={onLetterChosen} />);
-  expect(wrapper.find('button').length).toEqual(1);
-  expect(wrapper.find('button').text()).toEqual('A');
-  expect(wrapper.find('button').hasClass(className)).toEqual(true);
+  expect(wrapper.find('button')).toHaveLength(1);
+  expect(wrapper.find('button').text()).toBe('A');
+  expect(wrapper.find('button').hasClass(className)).toBe(true);
   wrapper.find('button').simulate('click');
   expect(onLetterChosen).toHaveBeenCalledTimes(callCount);
   if (callCount) {

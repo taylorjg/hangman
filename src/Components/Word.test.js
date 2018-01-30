@@ -9,9 +9,9 @@ it('renders correctly when game is over', () => {
       gameState={C.GAME_STATE_GAME_OVER}
       word="REACT"
       goodGuesses="EC" />);
-  expect(wrapper.find('span').length).toEqual(1);
-  expect(wrapper.find('span').text()).toEqual('REACT');
-  expect(wrapper.find('span').hasClass('Word')).toEqual(true);
+  expect(wrapper.find('span')).toHaveLength(1);
+  expect(wrapper.find('span').text()).toBe('REACT');
+  expect(wrapper.find('span').hasClass('Word')).toBe(true);
 });
 
 it('renders correctly when game is in progress', () => {
@@ -20,9 +20,9 @@ it('renders correctly when game is in progress', () => {
       gameState={C.GAME_STATE_IN_PROGRESS}
       word="PROGRESS"
       goodGuesses="POS" />);
-  expect(wrapper.find('span').length).toEqual(1);
-  expect(wrapper.find('span').text()).toEqual('P-O---SS');
-  expect(wrapper.find('span').hasClass('Word')).toEqual(true);
+  expect(wrapper.find('span')).toHaveLength(1);
+  expect(wrapper.find('span').text()).toBe('P-O---SS');
+  expect(wrapper.find('span').hasClass('Word')).toBe(true);
 });
 
 it('renders correctly when word is being chosen', () => {
@@ -31,7 +31,7 @@ it('renders correctly when word is being chosen', () => {
       gameState={C.GAME_STATE_CHOOSING_WORD}
       word=""
       goodGuesses="" />);
-  expect(wrapper.find('span').length).toEqual(1);
-  expect(wrapper.find('span').hasClass('Word-loading')).toEqual(true);
-  expect(wrapper.find('span').find('img').length).toEqual(1);
+  expect(wrapper.find('span')).toHaveLength(1);
+  expect(wrapper.find('span').hasClass('Word-loading')).toBe(true);
+  expect(wrapper.find('span').find('img')).toHaveLength(1);
 });

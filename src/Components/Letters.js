@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Letter, * as L from './Letter';
+import * as C from '../constants';
 import './Letters.css';
 
-const Letters = ({ goodGuesses, badGuesses, onLetterChosen }) => {
+const Letters = ({ gameState, goodGuesses, badGuesses, onLetterChosen }) => {
 
   const LETTER_ROWS = [
     Array.from('QWERTYUIOP'),
@@ -35,16 +36,18 @@ const Letters = ({ goodGuesses, badGuesses, onLetterChosen }) => {
       }
     </div>;
 
-  return (
+  const renderRowsOfLetters = () =>
     <div>
       {renderRowOfLetters(0)}
       {renderRowOfLetters(1)}
       {renderRowOfLetters(2)}
-    </div>
-  );
+    </div>;
+
+  return gameState === C.GAME_STATE_IN_PROGRESS && renderRowsOfLetters();
 };
 
 Letters.propTypes = {
+  gameState: PropTypes.number.isRequired,
   goodGuesses: PropTypes.string.isRequired,
   badGuesses: PropTypes.string.isRequired,
   onLetterChosen: PropTypes.func.isRequired
