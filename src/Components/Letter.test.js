@@ -1,40 +1,32 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import Letter, * as L from './Letter';
 
-it('renders correctly when letter is available', () => {
+const helper = (mode, className, callCount) => {
   const onLetterChosen = jest.fn();
-  const wrapper = shallow(
+  const wrapper = mount(
     <Letter
       letter="A"
-      mode={L.LETTER_MODE_AVAILABLE}
+      mode={mode}
       onLetterChosen={onLetterChosen} />);
-  expect(wrapper.find('button').length).toEqual(1);
-  expect(wrapper.find('button').text()).toEqual('A');
+  expect(wrapper.find('button')).toHaveLength(1);
+  expect(wrapper.find('button').text()).toBe('A');
+  expect(wrapper.find('button').hasClass(className)).toBe(true);
   wrapper.find('button').simulate('click');
-  expect(onLetterChosen).toHaveBeenCalledWith('A');
+  expect(onLetterChosen).toHaveBeenCalledTimes(callCount);
+  if (callCount) {
+    expect(onLetterChosen).toHaveBeenCalledWith('A');
+  }
+};
+
+it('renders correctly when letter is available', () => {
+  helper(L.LETTER_MODE_AVAILABLE, 'Letter-available', 1);
 });
 
 it('renders correctly when letter is a good guess', () => {
-  const onLetterChosen = jest.fn();
-  const wrapper = shallow(
-    <Letter
-      letter="A"
-      mode={L.LETTER_MODE_CORRECT}
-      onLetterChosen={onLetterChosen} />);
-  expect(wrapper.find('span').length).toEqual(1);
-  expect(wrapper.find('span').text()).toEqual('A');
-  expect(wrapper.find('span').hasClass('Letter-correct')).toEqual(true);
+  helper(L.LETTER_MODE_CORRECT, 'Letter-correct', 0);
 });
 
 it('renders correctly when letter is a bad guess', () => {
-  const onLetterChosen = jest.fn();
-  const wrapper = shallow(
-    <Letter
-      letter="A"
-      mode={L.LETTER_MODE_INCORRECT}
-      onLetterChosen={onLetterChosen} />);
-  expect(wrapper.find('span').length).toEqual(1);
-  expect(wrapper.find('span').text()).toEqual('A');
-  expect(wrapper.find('span').hasClass('Letter-incorrect')).toEqual(true);
+  helper(L.LETTER_MODE_INCORRECT, 'Letter-incorrect', 0);
 });

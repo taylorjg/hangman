@@ -5,9 +5,9 @@ import { MAX_BAD_GUESSES } from '../constants';
 
 const helper = badGuesses => {
   const wrapper = mount(<Gallows badGuesses={badGuesses} />);
-  expect(wrapper.find('svg').length).toEqual(1);
+  expect(wrapper.find('svg')).toHaveLength(1);
   const svgNode = wrapper.getDOMNode();
-  expect(svgNode.querySelectorAll('path').length).toEqual(badGuesses.length);
+  expect(svgNode.querySelectorAll('path')).toHaveLength(badGuesses.length);
 };
 
 it('renders correctly for the given number of bad guesses', () => {

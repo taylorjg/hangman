@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { api } from '../api';
+import RemainingLives from '../Components/RemainingLives';
 import Gallows from '../Components/Gallows';
 import Word from '../Components/Word';
 import Letters from '../Components/Letters';
@@ -104,6 +105,7 @@ class App extends Component {
     return (
       <div className="App" ref={this.establishKeyPressHandler}>
         <div className="App-version">version: {version}</div>
+        <RemainingLives {...this.state} />
         <Gallows {...this.state} />
         <Word {...this.state} />
         <Letters {...this.state} onLetterChosen={this.onLetterChosen} />
