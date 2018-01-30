@@ -106,6 +106,18 @@ it('handles game over / lost correctly', async () => {
   expect(wrapper.state('outcome')).toEqual(C.OUTCOME_LOST);
 });
 
+it('non A-Z letter choices are ignored', async () => {
+
+  const wrapper = shallow(<App />);
+
+  const instance = wrapper.instance();
+  await instance.componentDidMount();
+
+  instance.onLetterChosen('1');
+  expect(wrapper.state('goodGuesses')).toEqual('');
+  expect(wrapper.state('badGuesses')).toEqual('');
+});
+
 it('handles letter button clicks correctly', async () => {
 
   const wrapper = mount(<App />);
