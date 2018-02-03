@@ -83,7 +83,7 @@ class App extends Component {
     if (element) {
       this.ownerDocument = element.ownerDocument;
       this.ownerDocument.addEventListener('keypress', this.onKeyPress);
-      }
+    }
   }
 
   componentWillUnmount() {
@@ -105,11 +105,17 @@ class App extends Component {
     return (
       <div className="App" ref={this.establishKeyPressHandler}>
         <div className="App-version">version: {version}</div>
-        <RemainingLives {...this.state} />
-        <Gallows {...this.state} />
-        <Word {...this.state} />
-        <Letters {...this.state} onLetterChosen={this.onLetterChosen} />
-        <ControlPanel {...this.state} onNewGame={this.onNewGame} />
+        <div id="panes">
+          <div id="pane1">
+            <RemainingLives {...this.state} />
+            <Gallows {...this.state} />
+          </div>
+          <div id="pane2">
+            <Word {...this.state} />
+            <Letters {...this.state} onLetterChosen={this.onLetterChosen} />
+            <ControlPanel {...this.state} onNewGame={this.onNewGame} />
+          </div>
+        </div>
         <ErrorPanel {...this.state} />
       </div>
     );

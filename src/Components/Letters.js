@@ -22,8 +22,8 @@ const Letters = ({ gameState, goodGuesses, badGuesses, onLetterChosen }) => {
     return L.LETTER_MODE_AVAILABLE;
   };
 
-  const renderRowOfLetters = letters =>
-    <div className="Letters-row">
+  const renderRowOfLetters = (letters, row) =>
+    <div className="Letters-row" key={row}>
       {
         letters.map(letter =>
           <Letter
