@@ -7,8 +7,9 @@ import './Letters.css';
 const Letters = ({ gameState, goodGuesses, badGuesses, onLetterChosen }) => {
 
   const LETTER_ROWS = [
-    C.LETTERS.slice(0, 13),
-    C.LETTERS.slice(13, 26)
+    C.LETTERS.slice(0, 9),
+    C.LETTERS.slice(9, 18),
+    C.LETTERS.slice(18, 26)
   ];
 
   const getLetterMode = letter => {
@@ -21,10 +22,10 @@ const Letters = ({ gameState, goodGuesses, badGuesses, onLetterChosen }) => {
     return L.LETTER_MODE_AVAILABLE;
   };
 
-  const renderRowOfLetters = row =>
+  const renderRowOfLetters = letters =>
     <div className="Letters-row">
       {
-        LETTER_ROWS[row].map(letter =>
+        letters.map(letter =>
           <Letter
             key={letter}
             letter={letter}
@@ -37,8 +38,7 @@ const Letters = ({ gameState, goodGuesses, badGuesses, onLetterChosen }) => {
 
   const renderRowsOfLetters = () =>
     <div>
-      {renderRowOfLetters(0)}
-      {renderRowOfLetters(1)}
+      {LETTER_ROWS.map(renderRowOfLetters)}
     </div>;
 
   return gameState === C.GAME_STATE_IN_PROGRESS && renderRowsOfLetters();
