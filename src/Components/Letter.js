@@ -19,7 +19,7 @@ const Letter = ({ letter, mode, onLetterChosen }) => {
 
   const renderButton = () =>
     <button
-      className={getClassName()}
+      className={'Letter ' + getClassName()}
       onClick={() => onLetterChosen(letter)}
       disabled={mode !== LETTER_MODE_AVAILABLE}
     >

@@ -4,9 +4,6 @@ import Letters from './Letters';
 import Letter, * as L from './Letter';
 import * as C from '../constants';
 
-// QWERTY layout
-const LETTERS = Array.from('QWERTYUIOPASDFGHJKLZXCVBNM');
-
 const letterToMode = letter => {
   switch (letter) {
     case 'A':
@@ -21,7 +18,7 @@ const letterToMode = letter => {
 };
 
 const helper = (letterComponent, index) => {
-  const letter = LETTERS[index];
+  const letter = C.LETTERS[index];
   const mode = letterToMode(letter);
   expect(letterComponent.prop('letter')).toBe(letter);
   expect(letterComponent.prop('mode')).toBe(mode);
