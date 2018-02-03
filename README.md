@@ -22,7 +22,7 @@ Words are chosen from the list of programming languages [here](https://raw.githu
 * ~~Add keyboard support~~
 * ~~Add web api error handling / local fallback~~
 * ~~Add tests~~
-* Improve the UI (Bootstrap etc)
+* Improve the UI
 * Convert to Redux
 
 ## Further Ideas
