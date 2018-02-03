@@ -1,9 +1,7 @@
-.Letters-row {
-  margin-bottom: 6px;
+.Letters-row:first-child {
+  margin-bottom: 5px;
 }
 
-.Letters-row button {
-  width: 21px;
-  height: 21px;
-  margin-right: 3px;
+.Letters-row:last-child {
+  margin-bottom: 10px;
 }

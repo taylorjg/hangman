@@ -7,9 +7,8 @@ import './Letters.css';
 const Letters = ({ gameState, goodGuesses, badGuesses, onLetterChosen }) => {
 
   const LETTER_ROWS = [
-    Array.from('QWERTYUIOP'),
-    Array.from('ASDFGHJKL'),
-    Array.from('ZXCVBNM')
+    C.LETTERS.slice(0, 13),
+    C.LETTERS.slice(13, 26)
   ];
 
   const getLetterMode = letter => {
@@ -40,7 +39,6 @@ const Letters = ({ gameState, goodGuesses, badGuesses, onLetterChosen }) => {
     <div>
       {renderRowOfLetters(0)}
       {renderRowOfLetters(1)}
-      {renderRowOfLetters(2)}
     </div>;
 
   return gameState === C.GAME_STATE_IN_PROGRESS && renderRowsOfLetters();
