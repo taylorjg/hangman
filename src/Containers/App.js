@@ -11,7 +11,7 @@ import * as actions from './actions';
 import { version } from '../../package.json';
 import './App.css';
 
-class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props);
     this.establishKeyPressHandler = this.establishKeyPressHandler.bind(this);
