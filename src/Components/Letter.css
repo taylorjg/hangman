@@ -8,8 +8,10 @@
 
 .Letter-correct {
   color: #00ff00;
+  background-color: #00ff0020;
 }
 
 .Letter-incorrect {
   color: #ff0000;
+  background-color: #ff000020;
 }

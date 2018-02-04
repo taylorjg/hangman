@@ -114,9 +114,9 @@ class App extends Component {
             <Word {...this.state} />
             <Letters {...this.state} onLetterChosen={this.onLetterChosen} />
             <ControlPanel {...this.state} onNewGame={this.onNewGame} />
+            <ErrorPanel {...this.state} />
           </div>
         </div>
-        <ErrorPanel {...this.state} />
       </div>
     );
   }

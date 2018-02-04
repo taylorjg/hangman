@@ -14,11 +14,11 @@
     display: table; 
   }
   #pane1 {
-    width: 50%;
+    width: 40%;
     display: table-cell;
   }
   #pane2 {
-    width: 50%;
+    width: 60%;
     display: table-cell;
     vertical-align: middle;
   }
