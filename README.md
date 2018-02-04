@@ -22,16 +22,17 @@ Words are chosen from the list of programming languages [here](https://raw.githu
 * ~~Add keyboard support~~
 * ~~Add web api error handling / local fallback~~
 * ~~Add tests~~
-* Improve the UI
-* Convert to Redux
+* ~~Improve the UI~~
+* Add Redux
 
 ## Further Ideas
 
 * Add a favicon
+* Implement [accessibility](https://a11yproject.com/)
 * Animate the SVG gallows rendering
 * Chalk-like look
-* Responsive UI
-* Sound effects
+* ~~Responsive UI~~
+* Add sound effects
 * Provide facility to enter a guess at the full word
 * Support different difficulty levels
 * Support different categories of words

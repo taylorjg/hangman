@@ -1,8 +1,5 @@
 {
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
+    "extends": "react-app",
     "parserOptions": {
         "ecmaVersion": 8,
         "sourceType": "module"

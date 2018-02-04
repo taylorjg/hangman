@@ -39,22 +39,22 @@ it('handles good and bad guesses correctly', async () => {
   expect(wrapper.state('goodGuesses')).toBe('');
   expect(wrapper.state('badGuesses')).toBe('');
 
-  instance.onLetterChosen('A');
+  instance.onChooseLetter('A');
   expect(wrapper.state('word')).toBe('REACT');
   expect(wrapper.state('goodGuesses')).toBe('A');
   expect(wrapper.state('badGuesses')).toBe('');
 
-  instance.onLetterChosen('B');
+  instance.onChooseLetter('B');
   expect(wrapper.state('word')).toBe('REACT');
   expect(wrapper.state('goodGuesses')).toBe('A');
   expect(wrapper.state('badGuesses')).toBe('B');
 
-  instance.onLetterChosen('A');
+  instance.onChooseLetter('A');
   expect(wrapper.state('word')).toBe('REACT');
   expect(wrapper.state('goodGuesses')).toBe('A');
   expect(wrapper.state('badGuesses')).toBe('B');
 
-  instance.onLetterChosen('B');
+  instance.onChooseLetter('B');
   expect(wrapper.state('word')).toBe('REACT');
   expect(wrapper.state('goodGuesses')).toBe('A');
   expect(wrapper.state('badGuesses')).toBe('B');
@@ -67,11 +67,11 @@ it('handles game over / won correctly', async () => {
   const instance = wrapper.instance();
   await instance.componentDidMount();
 
-  instance.onLetterChosen('R');
-  instance.onLetterChosen('E');
-  instance.onLetterChosen('A');
-  instance.onLetterChosen('C');
-  instance.onLetterChosen('T');
+  instance.onChooseLetter('R');
+  instance.onChooseLetter('E');
+  instance.onChooseLetter('A');
+  instance.onChooseLetter('C');
+  instance.onChooseLetter('T');
 
   expect(wrapper.state('word')).toBe('REACT');
   expect(wrapper.state('goodGuesses')).toBe('REACT');
@@ -87,17 +87,17 @@ it('handles game over / lost correctly', async () => {
   const instance = wrapper.instance();
   await instance.componentDidMount();
 
-  instance.onLetterChosen('B');
-  instance.onLetterChosen('D');
-  instance.onLetterChosen('F');
-  instance.onLetterChosen('G');
-  instance.onLetterChosen('H');
-  instance.onLetterChosen('I');
-  instance.onLetterChosen('J');
-  instance.onLetterChosen('K');
-  instance.onLetterChosen('L');
-  instance.onLetterChosen('M');
-  instance.onLetterChosen('N');
+  instance.onChooseLetter('B');
+  instance.onChooseLetter('D');
+  instance.onChooseLetter('F');
+  instance.onChooseLetter('G');
+  instance.onChooseLetter('H');
+  instance.onChooseLetter('I');
+  instance.onChooseLetter('J');
+  instance.onChooseLetter('K');
+  instance.onChooseLetter('L');
+  instance.onChooseLetter('M');
+  instance.onChooseLetter('N');
 
   expect(wrapper.state('word')).toBe('REACT');
   expect(wrapper.state('goodGuesses')).toBe('');
@@ -113,7 +113,7 @@ it('non A-Z letter choices are ignored', async () => {
   const instance = wrapper.instance();
   await instance.componentDidMount();
 
-  instance.onLetterChosen('1');
+  instance.onChooseLetter('1');
   expect(wrapper.state('goodGuesses')).toBe('');
   expect(wrapper.state('badGuesses')).toBe('');
 });

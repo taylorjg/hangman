@@ -5,13 +5,13 @@ import Letter, * as L from './Letter';
 import * as C from '../constants';
 
 const setup = gameState => {
-  const onLetterChosen = jest.fn();
+  const onChooseLetter = jest.fn();
   return shallow(
     <Letters
       gameState={gameState}
       goodGuesses="AE"
       badGuesses="XY"
-      onLetterChosen={onLetterChosen} />);
+      onChooseLetter={onChooseLetter} />);
 };
 
 const letterToMode = letter => {
