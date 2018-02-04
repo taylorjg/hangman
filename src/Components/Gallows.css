@@ -3,21 +3,21 @@
 	margin-bottom: 10px;
 }
 
-@media (max-width: 767px) and (orientation: portrait) {
+@media (max-width: 1023px) and (orientation: portrait) {
 	#gallows {
 		width: 200px;
 		height: 200px;
 	}
 }
 
-@media (max-width: 767px) and (orientation: landscape) {
+@media (max-width: 1023px) and (orientation: landscape) {
 	#gallows {
 		width: 150px;
 		height: 150px;
 	}
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
 	#gallows {
 		width: 300px;
 		height: 300px;
