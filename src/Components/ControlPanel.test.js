@@ -3,31 +3,28 @@ import { shallow } from 'enzyme';
 import ControlPanel from './ControlPanel';
 import * as C from '../constants';
 
+const setup = (gameState, outcome) => {
+  const onNewGame = jest.fn();
+  const wrapper = shallow(
+    <ControlPanel
+      gameState={gameState}
+      outcome={outcome}
+      onNewGame={onNewGame} />);
+  return { wrapper, onNewGame };
+};
+
 it('renders correctly when choosing a word', () => {
-  const wrapper = shallow(<ControlPanel
-    gameState={C.GAME_STATE_CHOOSING_WORD}
-    outcome={C.OUTCOME_NONE}
-    onNewGame={() => { }} />);
+  const { wrapper } = setup(C.GAME_STATE_CHOOSING_WORD, C.OUTCOME_NONE);
   expect(wrapper.children()).toHaveLength(0);
 });
 
 it('renders correctly when game is in progress', () => {
-  const onNewGame = jest.fn();
-  const wrapper = shallow(
-    <ControlPanel
-      gameState={C.GAME_STATE_IN_PROGRESS}
-      outcome={C.OUTCOME_NONE}
-      onNewGame={onNewGame} />);
+  const { wrapper } = setup(C.GAME_STATE_IN_PROGRESS, C.OUTCOME_NONE);
   expect(wrapper.children()).toHaveLength(0);
 });
 
 it('renders correctly when the game is over (won)', () => {
-  const onNewGame = jest.fn();
-  const wrapper = shallow(
-    <ControlPanel
-      gameState={C.GAME_STATE_GAME_OVER}
-      outcome={C.OUTCOME_WON}
-      onNewGame={onNewGame} />);
+  const { wrapper, onNewGame } = setup(C.GAME_STATE_GAME_OVER, C.OUTCOME_WON);
   const message = <p>You won!</p>;
   expect(wrapper.contains(message)).toBe(true);
   expect(wrapper.find('button')).toHaveLength(1);
@@ -37,12 +34,7 @@ it('renders correctly when the game is over (won)', () => {
 });
 
 it('renders correctly when the game is over (lost)', () => {
-  const onNewGame = jest.fn();
-  const wrapper = shallow(
-    <ControlPanel
-      gameState={C.GAME_STATE_GAME_OVER}
-      outcome={C.OUTCOME_LOST}
-      onNewGame={onNewGame} />);
+  const { wrapper, onNewGame } = setup(C.GAME_STATE_GAME_OVER, C.OUTCOME_LOST);
   const message = <p>You lost!</p>;
   expect(wrapper.contains(message)).toBe(true);
   expect(wrapper.find('button')).toHaveLength(1);

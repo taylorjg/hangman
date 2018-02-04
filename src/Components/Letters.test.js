@@ -4,6 +4,16 @@ import Letters from './Letters';
 import Letter, * as L from './Letter';
 import * as C from '../constants';
 
+const setup = gameState => {
+  const onLetterChosen = jest.fn();
+  return shallow(
+    <Letters
+      gameState={gameState}
+      goodGuesses="AE"
+      badGuesses="XY"
+      onLetterChosen={onLetterChosen} />);
+};
+
 const letterToMode = letter => {
   switch (letter) {
     case 'A':
@@ -25,36 +35,18 @@ const helper = (letterComponent, index) => {
 };
 
 it('renders correctly when a game is in progress', () => {
-  const onLetterChosen = jest.fn();
-  const wrapper = shallow(
-    <Letters
-      gameState={C.GAME_STATE_IN_PROGRESS}
-      goodGuesses="AE"
-      badGuesses="XY"
-      onLetterChosen={onLetterChosen} />);
+  const wrapper = setup(C.GAME_STATE_IN_PROGRESS);
   const letterComponents = wrapper.find(Letter);
   expect(letterComponents).toHaveLength(26);
   letterComponents.forEach(helper);
 });
 
 it('renders renders nothing when choosing a word', () => {
-  const onLetterChosen = jest.fn();
-  const wrapper = shallow(
-    <Letters
-      gameState={C.GAME_STATE_CHOOSING_WORD}
-      goodGuesses="AE"
-      badGuesses="XY"
-      onLetterChosen={onLetterChosen} />);
+  const wrapper = setup(C.GAME_STATE_CHOOSING_WORD);
   expect(wrapper.children()).toHaveLength(0);
 });
 
 it('renders renders nothing when game is over', () => {
-  const onLetterChosen = jest.fn();
-  const wrapper = shallow(
-    <Letters
-      gameState={C.GAME_STATE_GAME_OVER}
-      goodGuesses="AE"
-      badGuesses="XY"
-      onLetterChosen={onLetterChosen} />);
+  const wrapper = setup(C.GAME_STATE_GAME_OVER);
   expect(wrapper.children()).toHaveLength(0);
 });

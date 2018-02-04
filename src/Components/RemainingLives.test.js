@@ -1,13 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import RemainingLives from './RemainingLives';
-import { MAX_BAD_GUESSES } from '../constants';
-
-const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+import * as C from '../constants';
 
 const helper = numBadGuesses => {
-  const badGuesses = LETTERS.substr(0, numBadGuesses);
-  const remainingLives = MAX_BAD_GUESSES - numBadGuesses;
+  const badGuesses = C.LETTERS.slice(0, numBadGuesses).join('');
+  const remainingLives = Math.max(C.MAX_BAD_GUESSES - numBadGuesses, 0);
   const expectedSpanText = `Remaining lives: ${remainingLives}`;
   const wrapper = shallow(<RemainingLives badGuesses={badGuesses} />);
   expect(wrapper.find('span')).toHaveLength(1);
@@ -15,5 +13,5 @@ const helper = numBadGuesses => {
 };
 
 it('renders the correct number of remaining lives', () => {
-  Array.from(LETTERS).forEach((_, index) => helper(index));
+  C.LETTERS.forEach((_, index) => helper(index));
 });

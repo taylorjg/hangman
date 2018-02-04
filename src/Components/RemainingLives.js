@@ -7,7 +7,7 @@ const RemainingLives = ({ badGuesses }) => {
   return (
     <p>
       <span className="RemainingLives">
-        Remaining lives: {MAX_BAD_GUESSES - badGuesses.length}
+        Remaining lives: {Math.max(MAX_BAD_GUESSES - badGuesses.length, 0)}
       </span>
     </p>
   );
