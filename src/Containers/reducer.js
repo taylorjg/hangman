@@ -1,7 +1,7 @@
 import * as AT from './actionTypes';
 import * as C from '../constants';
 
-const initialState = {
+export const initialState = {
   gameState: C.GAME_STATE_CHOOSING_WORD,
   outcome: C.OUTCOME_NONE,
   word: '',

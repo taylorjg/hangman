@@ -23,7 +23,7 @@ Words are chosen from the list of programming languages [here](https://raw.githu
 * ~~Add web api error handling / local fallback~~
 * ~~Add tests~~
 * ~~Improve the UI~~
-* Add Redux
+* ~~Add Redux~~
 
 ## Further Ideas
 
