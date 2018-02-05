@@ -47,7 +47,7 @@ const removeChidren = node => {
 export const drawGallows = numBadGuesses => svg => {
   if (svg) {
     removeChidren(svg);
-    const drawingData = numBadGuesses == NUM_GALLOWS_STEPS
+    const drawingData = numBadGuesses === NUM_GALLOWS_STEPS
       ? DRAWING_DATA_2
       : DRAWING_DATA_1;
     drawingData.forEach((data, index) => {

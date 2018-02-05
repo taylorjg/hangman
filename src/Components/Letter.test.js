@@ -3,19 +3,19 @@ import { mount } from 'enzyme';
 import Letter, * as L from './Letter';
 
 const helper = (mode, className, callCount) => {
-  const onLetterChosen = jest.fn();
+  const onChooseLetter = jest.fn();
   const wrapper = mount(
     <Letter
       letter="A"
       mode={mode}
-      onLetterChosen={onLetterChosen} />);
+      onChooseLetter={onChooseLetter} />);
   expect(wrapper.find('button')).toHaveLength(1);
   expect(wrapper.find('button').text()).toBe('A');
   expect(wrapper.find('button').hasClass(className)).toBe(true);
   wrapper.find('button').simulate('click');
-  expect(onLetterChosen).toHaveBeenCalledTimes(callCount);
+  expect(onChooseLetter).toHaveBeenCalledTimes(callCount);
   if (callCount) {
-    expect(onLetterChosen).toHaveBeenCalledWith('A');
+    expect(onChooseLetter).toHaveBeenCalledWith('A');
   }
 };
 

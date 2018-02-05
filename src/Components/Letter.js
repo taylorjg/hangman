@@ -6,7 +6,7 @@ export const LETTER_MODE_AVAILABLE = 0;
 export const LETTER_MODE_CORRECT = 1;
 export const LETTER_MODE_INCORRECT = 2;
 
-const Letter = ({ letter, mode, onLetterChosen }) => {
+const Letter = ({ letter, mode, onChooseLetter }) => {
 
   const getClassName = () => {
     switch (mode) {
@@ -20,7 +20,7 @@ const Letter = ({ letter, mode, onLetterChosen }) => {
   const renderButton = () =>
     <button
       className={'Letter ' + getClassName()}
-      onClick={() => onLetterChosen(letter)}
+      onClick={() => onChooseLetter(letter)}
       disabled={mode !== LETTER_MODE_AVAILABLE}
     >
       {letter}
@@ -32,7 +32,7 @@ const Letter = ({ letter, mode, onLetterChosen }) => {
 Letter.propTypes = {
   letter: PropTypes.string.isRequired,
   mode: PropTypes.number.isRequired,
-  onLetterChosen: PropTypes.func.isRequired
+  onChooseLetter: PropTypes.func.isRequired
 };
 
 export default Letter;

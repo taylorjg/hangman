@@ -4,7 +4,7 @@ import Letter, * as L from './Letter';
 import * as C from '../constants';
 import './Letters.css';
 
-const Letters = ({ gameState, goodGuesses, badGuesses, onLetterChosen }) => {
+const Letters = ({ gameState, goodGuesses, badGuesses, onChooseLetter }) => {
 
   const LETTER_ROWS = [
     C.LETTERS.slice(0, 9),
@@ -30,7 +30,7 @@ const Letters = ({ gameState, goodGuesses, badGuesses, onLetterChosen }) => {
             key={letter}
             letter={letter}
             mode={getLetterMode(letter)}
-            onLetterChosen={onLetterChosen}>
+            onChooseLetter={onChooseLetter}>
           </Letter>
         )
       }
@@ -48,7 +48,7 @@ Letters.propTypes = {
   gameState: PropTypes.number.isRequired,
   goodGuesses: PropTypes.string.isRequired,
   badGuesses: PropTypes.string.isRequired,
-  onLetterChosen: PropTypes.func.isRequired
+  onChooseLetter: PropTypes.func.isRequired
 };
 
 export default Letters;
