@@ -20,6 +20,5 @@ export const newGame = () =>
   async dispatch => {
     dispatch(chooseWordStarted());
     const data = await api.chooseWord();
-    console.log(`data: ${JSON.stringify(data)}`);
     dispatch(chooseWordCompleted(data.word, data.errorMessage));
   };
