@@ -9,8 +9,8 @@ const setup = gameState => {
   return shallow(
     <Letters
       gameState={gameState}
-      goodGuesses="AE"
-      badGuesses="XY"
+      goodGuesses={new Set('AE')}
+      badGuesses={new Set("XY")}
       onChooseLetter={onChooseLetter} />);
 };
 
@@ -28,7 +28,7 @@ const letterToMode = letter => {
 };
 
 const helper = (letterComponent, index) => {
-  const letter = C.LETTERS[index];
+  const letter = C.LETTERS_ARRAY[index];
   const mode = letterToMode(letter);
   expect(letterComponent.prop('letter')).toBe(letter);
   expect(letterComponent.prop('mode')).toBe(mode);

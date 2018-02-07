@@ -4,7 +4,7 @@ import RemainingLives from './RemainingLives';
 import * as C from '../constants';
 
 const helper = numBadGuesses => {
-  const badGuesses = C.LETTERS.slice(0, numBadGuesses).join('');
+  const badGuesses = new Set(C.LETTERS_STRING.substr(0, numBadGuesses));
   const remainingLives = Math.max(C.MAX_BAD_GUESSES - numBadGuesses, 0);
   const expectedSpanText = `Remaining lives: ${remainingLives}`;
   const wrapper = shallow(<RemainingLives badGuesses={badGuesses} />);
@@ -13,5 +13,5 @@ const helper = numBadGuesses => {
 };
 
 it('renders the correct number of remaining lives', () => {
-  C.LETTERS.forEach((_, index) => helper(index));
+  C.LETTERS_ARRAY.forEach((_, index) => helper(index));
 });

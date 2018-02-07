@@ -12,12 +12,12 @@ it('handles good guesses', () => {
     gameState: C.GAME_STATE_IN_PROGRESS,
     outcome: C.OUTCOME_NONE,
     word: 'REACT',
-    goodGuesses: '',
-    badGuesses: '',
+    goodGuesses: new Set(),
+    badGuesses: new Set(),
     errorMessage: ''
   };
   const newState = reducer(oldState, actions.chooseLetter('A'));
-  expect(newState).toEqual({ ...oldState, goodGuesses: 'A' });
+  expect(newState).toEqual({ ...oldState, goodGuesses: new Set('A') });
 });
 
 it('handles bad guesses', () => {
@@ -25,12 +25,12 @@ it('handles bad guesses', () => {
     gameState: C.GAME_STATE_IN_PROGRESS,
     outcome: C.OUTCOME_NONE,
     word: 'REACT',
-    goodGuesses: '',
-    badGuesses: '',
+    goodGuesses: new Set(),
+    badGuesses: new Set(),
     errorMessage: ''
   };
   const newState = reducer(oldState, actions.chooseLetter('B'));
-  expect(newState).toEqual({ ...oldState, badGuesses: 'B' });
+  expect(newState).toEqual({ ...oldState, badGuesses: new Set('B') });
 });
 
 it('detects game over / won', () => {
@@ -38,8 +38,8 @@ it('detects game over / won', () => {
     gameState: C.GAME_STATE_IN_PROGRESS,
     outcome: C.OUTCOME_NONE,
     word: 'REACT',
-    goodGuesses: 'REAC',
-    badGuesses: '',
+    goodGuesses: new Set('REAC'),
+    badGuesses: new Set(),
     errorMessage: ''
   };
   const newState = reducer(oldState, actions.chooseLetter('T'));
@@ -47,19 +47,19 @@ it('detects game over / won', () => {
     ...oldState,
     gameState: C.GAME_STATE_GAME_OVER,
     outcome: C.OUTCOME_WON,
-    goodGuesses: 'REACT'
+    goodGuesses: new Set('REACT')
   });
 });
 
 it('detects game over / lost', () => {
   const word = 'REACT';
-  const allBadGuesses = Array.from(word).reduce((acc, ch) => acc.replace(ch, ''), C.LETTERS.join(''));
-  const badGuesses = allBadGuesses.substr(0, C.MAX_BAD_GUESSES - 1);
+  const allBadGuesses = Array.from(word).reduce((acc, ch) => acc.replace(ch, ''), C.LETTERS_STRING);
+  const badGuesses = new Set(allBadGuesses.substr(0, C.MAX_BAD_GUESSES - 1));
   const oldState = {
     gameState: C.GAME_STATE_IN_PROGRESS,
     outcome: C.OUTCOME_NONE,
     word,
-    goodGuesses: '',
+    goodGuesses: new Set(),
     badGuesses,
     errorMessage: ''
   };
@@ -69,7 +69,7 @@ it('detects game over / lost', () => {
     ...oldState,
     gameState: C.GAME_STATE_GAME_OVER,
     outcome: C.OUTCOME_LOST,
-    badGuesses: oldState.badGuesses + letter
+    badGuesses: new Set(oldState.badGuesses).add(letter)
   });
 });
 
@@ -78,8 +78,8 @@ it('ignores guesses when choosing a word', () => {
     gameState: C.GAME_STATE_CHOOSING_WORD,
     outcome: C.OUTCOME_NONE,
     word: '',
-    goodGuesses: '',
-    badGuesses: '',
+    goodGuesses: new Set(),
+    badGuesses: new Set(),
     errorMessage: ''
   };
   const newState = reducer(oldState, actions.chooseLetter('A'));
@@ -91,8 +91,8 @@ it('ignores guesses when the game is over', () => {
     gameState: C.GAME_STATE_GAME_OVER,
     outcome: C.OUTCOME_WON,
     word: 'REACT',
-    goodGuesses: 'CRATE',
-    badGuesses: 'BDZ',
+    goodGuesses: new Set('CRATE'),
+    badGuesses: new Set('BDZ'),
     errorMessage: ''
   };
   const newState = reducer(oldState, actions.chooseLetter('A'));
@@ -104,8 +104,8 @@ it('ignores good guesses that have already been seen', () => {
     gameState: C.GAME_STATE_IN_PROGRESS,
     outcome: C.OUTCOME_NONE,
     word: 'REACT',
-    goodGuesses: 'REA',
-    badGuesses: 'BD',
+    goodGuesses: new Set('REA'),
+    badGuesses: new Set('BD'),
     errorMessage: ''
   };
   const newState = reducer(oldState, actions.chooseLetter('E'));
@@ -117,8 +117,8 @@ it('ignores bad guesses that have already been seen', () => {
     gameState: C.GAME_STATE_IN_PROGRESS,
     outcome: C.OUTCOME_NONE,
     word: 'REACT',
-    goodGuesses: 'REA',
-    badGuesses: 'BD',
+    goodGuesses: new Set('REA'),
+    badGuesses: new Set('BD'),
     errorMessage: ''
   };
   const newState = reducer(oldState, actions.chooseLetter('B'));
@@ -130,8 +130,8 @@ it('ignores non [A-Z] guesses', () => {
     gameState: C.GAME_STATE_IN_PROGRESS,
     outcome: C.OUTCOME_NONE,
     word: 'REACT',
-    goodGuesses: 'REA',
-    badGuesses: 'BD',
+    goodGuesses: new Set('REA'),
+    badGuesses: new Set('BD'),
     errorMessage: ''
   };
   const newState = reducer(oldState, actions.chooseLetter('1'));

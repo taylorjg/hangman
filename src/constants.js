@@ -10,4 +10,6 @@ export const OUTCOME_LOST = 2;
 
 export const MAX_BAD_GUESSES = NUM_GALLOWS_STEPS;
 
-export const LETTERS = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+export const LETTERS_STRING = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+export const LETTERS_ARRAY = Array.from(LETTERS_STRING);
+export const LETTERS_SET = new Set(LETTERS_STRING);

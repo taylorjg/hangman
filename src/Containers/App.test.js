@@ -23,8 +23,8 @@ const setup = () => {
       gameState={C.GAME_STATE_IN_PROGRESS}
       outcome={C.OUTCOME_NONE}
       word={'REACT'}
-      goodGuesses={''}
-      badGuesses={''}
+      goodGuesses={new Set()}
+      badGuesses={new Set()}
       errorMessage={''}
       onChooseLetter={onChooseLetter}
       onNewGame={onNewGame}
