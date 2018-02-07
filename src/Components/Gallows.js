@@ -7,11 +7,11 @@ const Gallows = ({ badGuesses }) =>
   <svg
     id="gallows"
     viewBox="0 0 300 300"
-    ref={drawGallows(badGuesses.length)}>
+    ref={drawGallows(badGuesses.size)}>
   </svg>;
 
 Gallows.propTypes = {
-  badGuesses: PropTypes.string.isRequired
+  badGuesses: PropTypes.instanceOf(Set).isRequired
 };
 
 export default Gallows;

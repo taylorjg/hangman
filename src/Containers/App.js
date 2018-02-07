@@ -64,8 +64,8 @@ App.propTypes = {
   gameState: PropTypes.number.isRequired,
   outcome: PropTypes.number.isRequired,
   word: PropTypes.string.isRequired,
-  goodGuesses: PropTypes.string.isRequired,
-  badGuesses: PropTypes.string.isRequired,
+  goodGuesses: PropTypes.instanceOf(Set).isRequired,
+  badGuesses: PropTypes.instanceOf(Set).isRequired,
   errorMessage: PropTypes.string.isRequired,
   onChooseLetter: PropTypes.func.isRequired,
   onNewGame: PropTypes.func.isRequired

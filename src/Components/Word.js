@@ -13,7 +13,7 @@ const Word = ({ gameState, word, goodGuesses }) => {
           <span className="Word">
             {
               Array.from(word).map(letter =>
-                goodGuesses.includes(letter) ? letter : '-')
+                goodGuesses.has(letter) ? letter : '-')
             }
           </span>
         );
@@ -42,7 +42,7 @@ const Word = ({ gameState, word, goodGuesses }) => {
 Word.propTypes = {
   gameState: PropTypes.number.isRequired,
   word: PropTypes.string.isRequired,
-  goodGuesses: PropTypes.string.isRequired
+  goodGuesses: PropTypes.instanceOf(Set).isRequired
 };
 
 export default Word;

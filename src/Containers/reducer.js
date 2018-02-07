@@ -5,8 +5,8 @@ export const initialState = {
   gameState: C.GAME_STATE_CHOOSING_WORD,
   outcome: C.OUTCOME_NONE,
   word: '',
-  goodGuesses: '',
-  badGuesses: '',
+  goodGuesses: new Set(),
+  badGuesses: new Set(),
   errorMessage: ''
 };
 
@@ -14,13 +14,10 @@ export const reducer = (state = initialState, action) => {
   switch (action.type) {
 
     case AT.CHOOSE_LETTER:
-      if (/^[A-Z]$/.test(action.letter) &&
-        state.gameState === C.GAME_STATE_IN_PROGRESS &&
-        !state.goodGuesses.includes(action.letter) &&
-        !state.badGuesses.includes(action.letter)) {
+      if (C.LETTERS_SET.has(action.letter) && state.gameState === C.GAME_STATE_IN_PROGRESS) {
         if (state.word.includes(action.letter)) {
-          const newGoodGuesses = state.goodGuesses + action.letter;
-          const gameOver = newGoodGuesses.length === new Set(state.word).size;
+          const newGoodGuesses = new Set(state.goodGuesses).add(action.letter);
+          const gameOver = newGoodGuesses.size === new Set(state.word).size;
           return {
             ...state,
             goodGuesses: newGoodGuesses,
@@ -29,8 +26,8 @@ export const reducer = (state = initialState, action) => {
           };
         }
         else {
-          const newBadGuesses = state.badGuesses + action.letter;
-          const gameOver = newBadGuesses.length === C.MAX_BAD_GUESSES;
+          const newBadGuesses = new Set(state.badGuesses).add(action.letter);
+          const gameOver = newBadGuesses.size === C.MAX_BAD_GUESSES;
           return {
             ...state,
             badGuesses: newBadGuesses,

@@ -7,14 +7,14 @@ const RemainingLives = ({ badGuesses }) => {
   return (
     <p>
       <span className="RemainingLives">
-        Remaining lives: {Math.max(MAX_BAD_GUESSES - badGuesses.length, 0)}
+        Remaining lives: {Math.max(MAX_BAD_GUESSES - badGuesses.size, 0)}
       </span>
     </p>
   );
 };
 
 RemainingLives.propTypes = {
-  badGuesses: PropTypes.string.isRequired
+  badGuesses: PropTypes.instanceOf(Set).isRequired
 };
 
 export default RemainingLives;

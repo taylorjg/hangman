@@ -5,18 +5,18 @@ import * as C from '../constants';
 import './Letters.css';
 
 const Letters = ({ gameState, goodGuesses, badGuesses, onChooseLetter }) => {
-
+  
   const LETTER_ROWS = [
-    C.LETTERS.slice(0, 9),
-    C.LETTERS.slice(9, 18),
-    C.LETTERS.slice(18, 26)
+    C.LETTERS_ARRAY.slice(0, 9),
+    C.LETTERS_ARRAY.slice(9, 18),
+    C.LETTERS_ARRAY.slice(18, 26)
   ];
 
   const getLetterMode = letter => {
-    if (goodGuesses.includes(letter)) {
+    if (goodGuesses.has(letter)) {
       return L.LETTER_MODE_CORRECT;
     }
-    if (badGuesses.includes(letter)) {
+    if (badGuesses.has(letter)) {
       return L.LETTER_MODE_INCORRECT;
     }
     return L.LETTER_MODE_AVAILABLE;
@@ -46,8 +46,8 @@ const Letters = ({ gameState, goodGuesses, badGuesses, onChooseLetter }) => {
 
 Letters.propTypes = {
   gameState: PropTypes.number.isRequired,
-  goodGuesses: PropTypes.string.isRequired,
-  badGuesses: PropTypes.string.isRequired,
+  goodGuesses: PropTypes.instanceOf(Set).isRequired,
+  badGuesses: PropTypes.instanceOf(Set).isRequired,
   onChooseLetter: PropTypes.func.isRequired
 };
 

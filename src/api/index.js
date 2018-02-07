@@ -6,7 +6,7 @@ export const api = {
     axios.get(
       '/api/chooseWord',
       {
-        timeout: 1000
+        timeout: 2000
       })
       .then(response => response.data)
       .catch(error => ({
